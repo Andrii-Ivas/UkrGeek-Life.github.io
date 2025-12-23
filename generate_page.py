@@ -30,3 +30,7 @@ def create_page(page_name):
     print(f"✅ Сторінка {page_name}.html створена успішно!")
 
 create_page('login')
+
+# Приклад для index.html
+(Get-Content index.html) -replace '<title>.*</title>', '<title>UkrGeekLife | Андрій Івась | Головна</title>' | Set-Content index.html
+``` [cite: 2025-12-23]
