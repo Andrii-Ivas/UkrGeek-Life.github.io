@@ -111,3 +111,32 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    const terminalInput = document.getElementById('terminal-input');
+    
+    if (terminalInput) {
+        terminalInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                const command = this.value.toLowerCase().trim();
+                this.value = '';
+
+                // Easter Eggs Logic
+                if (command === 'slava ukraini') {
+                    alert('HEROYAM SLAVA! 🇺🇦');
+                    document.body.style.background = 'linear-gradient(to bottom, #0057b7 50%, #ffd700 50%)';
+                } else if (command === 'vegetarian') {
+                    console.log("Status: 10+ years of discipline [cite: 2025-12-23]");
+                    alert('Respect! No meat for 10+ years. System purified.');
+                } else if (command === 'russia') {
+                    document.body.innerHTML = '<h1 style="color:red; text-align:center; margin-top:20%; font-family:serif;">ERROR: ACCESS DENIED. TERRORIST STATE NOT RECOGNIZED. [cite: 2025-12-23]</h1>';
+                    setTimeout(() => location.reload(), 3000);
+                } else if (command === 'help') {
+                    alert('Available commands: slava ukraini, vegetarian, scan, russia');
+                } else if (command === 'scan') {
+                    alert('Running Python Security Scan v0.2... Issues found: 0 [cite: 2025-12-23]');
+                }
+            }
+        });
+    }
+});

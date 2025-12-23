@@ -7,30 +7,43 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
+
 </head>
 <body>
 
-<nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-nav-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#hero" style="color: #22c55e; font-weight: bold;">UKR GEEK LIFE</a>
+# Визначаємо блок навігації з відносними шляхами для GitHub
+$navBlock = @"
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-main">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="./index.html" style="color: #22c55e;">UKR GEEK LIFE</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-main">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="./index.html"><i class="fa fa-home"></i> Головна</a></li>
+                    <li><a href="./about.html"><i class="fa fa-user"></i> Про Мене</a></li>
+                    <li><a href="./projects.html"><i class="fa fa-code"></i> Проєкти</a></li>
+                    <li><a href="./motivation.html"><i class="fa fa-bolt"></i> Мотивація</a></li>
+                    <li><a href="./contact.html"><i class="fa fa-envelope"></i> Контакти</a></li>
+                </ul>
+            </div>
         </div>
+    </nav>
+"@
 
-        <div class="collapse navbar-collapse" id="main-nav-collapse">
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#about"><i class="fa fa-user"></i> Про Мене</a></li>
-                <li><a href="#projects"><i class="fa fa-th-large"></i> Проєкти</a></li>
-                <li><a href="#motivation"><i class="fa fa-bullseye"></i> Мотивація</a></li>
-                <li><a href="#contact"><i class="fa fa-paper-plane"></i> Контакти</a></li>
-            </ul>
-        </div>
-    </div>
-</nav>
+# Оновлюємо всі HTML файли
+$htmlFiles = Get-ChildItem *.html
+foreach ($file in $htmlFiles) {
+    $content = Get-Content $file.FullName -Raw
+    $newContent = $content -replace '(?s)<nav.*?>.*?</nav>', $navBlock
+    $newContent | Out-File $file.FullName -Encoding utf8
+    Write-Host "[+] GitHub Link Applied: $($file.Name)" -ForegroundColor Cyan
+}
 
 <div style="height: 50px;"></div>
 
