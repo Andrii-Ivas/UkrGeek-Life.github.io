@@ -1,3 +1,4 @@
+$OutputEncoding = [Console]::InputEncoding = [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 # UkrGeekLife | Андрій Івась | Full Automation Deploy Script
 Write-Host "--- Starting Deployment: UkrGeekLife ---" -ForegroundColor Cyan
 
