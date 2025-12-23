@@ -1,7 +1,14 @@
 import os
 
-# --- КОНФІГУРАЦІЯ (Тут ти керуєш усім) ---
+# --- НАЛАШТУВАННЯ UTF-8 ДЛЯ КОНСОЛІ WINDOWS ---
+import sys
+# Примушуємо Python писати в консоль UTF-8, щоб не було помилок при print()
+sys.stdout.reconfigure(encoding='utf-8')
+
+# --- КОНФІГУРАЦІЯ ---
 IDENTITY = "UkrGeekLife | Андрій Івась"
+
+# МЕНЮ (Перевіряємо, щоб лінки вели на існуючі файли)
 NAV_MENU = """
 <nav role="navigation" aria-label="Головне меню" class="main-nav">
     <a href="index.html" class="nav-link">[ ГОЛОВНА ]</a>
@@ -11,12 +18,13 @@ NAV_MENU = """
 </nav>
 """
 
-# HTML Шаблон для звичайних сторінок (Адаптивний + Матриця)
+# ШАБЛОН (Зверни увагу на meta charset="UTF-8")
 BASE_TEMPLATE = """<!DOCTYPE html>
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>{title}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{title}</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -32,31 +40,31 @@ BASE_TEMPLATE = """<!DOCTYPE html>
 </body>
 </html>"""
 
-# Контент для сторінок (Тут міняєш текст)
+# КОНТЕНТ СТОРІНОК
 PAGES = {
     "index.html": {
         "title": f"Головна | {IDENTITY}",
-        "content": "<h1>Вітаю в системі.</h1><p>Це цифровий простір Андрія Івася.</p>"
+        "content": "<h1>Система UkrGeekLife</h1><p>Ідентичність підтверджено.</p><p>Статус: Онлайн.</p>"
     },
     "about.html": {
         "title": f"Про Мене | {IDENTITY}",
-        "content": "<h1>Хто я?</h1><p>Інженер. Патріот. Розробник.</p>"
+        "content": "<h1>Андрій Івась</h1><p>IT-фахівець. Патріот. Архітектор автоматизації.</p>"
     },
     "projects.html": {
         "title": f"Проєкти | {IDENTITY}",
-        "content": "<h1>Мої розробки</h1><p>Системи автоматизації та веб-рішення.</p>"
+        "content": "<h1>Арсенал</h1><ul><li>Автоматизація PowerShell</li><li>Python Backend</li><li>Web Security</li></ul>"
     },
     "contact.html": {
         "title": f"Термінал | {IDENTITY}",
-        "is_terminal": True # Маркер для спец-обробки
+        "is_terminal": True
     }
 }
 
 def update_system():
-    print(f"--- ЗАПУСК ПУБЛІКАЦІЇ: {IDENTITY} ---")
+    print(f"--- ПОЧАТОК ГЕНЕРАЦІЇ: {IDENTITY} ---")
     
     for filename, data in PAGES.items():
-        # Спеціальна логіка для Терміналу (Contact Page)
+        # ЛОГІКА ТЕРМІНАЛУ
         if data.get("is_terminal"):
             html_content = f"""<!DOCTYPE html>
 <html lang="uk">
@@ -65,14 +73,14 @@ def update_system():
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{data['title']}</title>
     <link rel="stylesheet" href="css/style.css">
-    <style>body {{ overflow: hidden; }}</style> </head>
+    <style>body {{ overflow: hidden; }}</style>
+</head>
 <body>
     <div class="matrix-bg"></div>
     <header>
         <div class="logo">{IDENTITY}</div>
         {NAV_MENU}
     </header>
-    
     <div class="terminal-wrapper">
         <div id="history">
             <p>UkrGeekLife OS v2.0 initialized...</p>
@@ -83,12 +91,12 @@ def update_system():
             <input type="text" id="cmd" autofocus>
         </div>
     </div>
-
     <script src="js/matrix.js"></script>
-    <script src="js/terminal.js"></script> </body>
+    <script src="js/terminal.js"></script>
+</body>
 </html>"""
         else:
-            # Генерація звичайних сторінок
+            # ЗВИЧАЙНА СТОРІНКА
             html_content = BASE_TEMPLATE.format(
                 title=data['title'],
                 logo=IDENTITY,
@@ -96,10 +104,12 @@ def update_system():
                 content=data['content']
             )
 
-        # ЗАПИС (UTF-8 ГАРАНТОВАНО)
+        # !!! ГОЛОВНИЙ ФІКС: encoding="utf-8" !!!
+        # Це змушує Python записувати файл саме в UTF-8, а не в кодуванні Windows.
         with open(filename, "w", encoding="utf-8") as f:
             f.write(html_content)
-        print(f"✅ Оновлено: {filename}")
+        
+        print(f"✅ Згенеровано (UTF-8): {filename}")
 
 if __name__ == "__main__":
     update_system()
