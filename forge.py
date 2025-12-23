@@ -1,41 +1,51 @@
 ﻿import json, os, difflib, datetime
-from bs4 import BeautifulSoup
 
-def forge_system():
-    log_file = "version_control.log"
+def forge_forensic_system():
+    log_file = "system_audit.txt"
     with open('site_data.json', 'r', encoding='utf-8-sig') as f: data = json.load(f)
-    with open('index.html', 'r', encoding='utf-8') as f: tmpl = f.read()
+    with open('index.html', 'r', encoding='utf-8') as f: master = f.read().splitlines()
 
-    report = f"\n[SESSION {datetime.datetime.now()}]\n"
+    now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    report = f"\n{'='*60}\nAUDIT LOG: {now}\n{'='*60}\n"
 
     for p in data['pages']:
-        soup = BeautifulSoup(tmpl, 'html.parser')
-        target = soup.find(id='app_content')
+        from bs4 import BeautifulSoup
+        soup = BeautifulSoup("\n".join(master), 'html.parser')
+        
+        target = soup.find(id='app_content') or soup.find('main')
         if target:
             target.clear()
             target.append(BeautifulSoup(p['content'], 'html.parser'))
-        
+
+        new_content = soup.prettify().splitlines()
         file_path = f"{p['name']}.html"
-        new_html = soup.prettify()
         
-        # Перевірка змін (Version Control Logic)
-        change_info = "[NEW FILE]"
         if os.path.exists(file_path):
             with open(file_path, 'r', encoding='utf-8') as f:
-                old_html = f.read()
-            if old_html.strip() == new_html.strip():
-                change_info = "[NO CHANGES]"
+                old_content = f.read().splitlines()
+            
+            # Пошук різниці з номерами рядків
+            diff = list(difflib.unified_diff(old_content, new_content, lineterm=''))
+            
+            if diff:
+                report += f"\n[MODIFIED] File: {file_path}\n"
+                # diff[2:] прибирає заголовок diff, залишаючи суть
+                for line in diff[2:]:
+                    report += f"  {line}\n"
+                print(f"✅ {file_path} - Changes logged.")
             else:
-                change_info = "[MODIFIED]"
-        
+                report += f"\n[STABLE] File: {file_path} - No changes detected.\n"
+                print(f"⚪ {file_path} - No changes.")
+        else:
+            report += f"\n[CREATED] File: {file_path}\n"
+            print(f"🆕 {file_path} - Created.")
+
         with open(file_path, 'w', encoding='utf-8') as f:
-            f.write(new_html)
-        
-        report += f"{change_info} -> {file_path}\n"
-        print(f"{change_info} {file_path}")
+            f.write("\n".join(new_content))
 
     with open(log_file, "a", encoding='utf-8') as f:
         f.write(report)
-    print(f"--- Changes saved to {log_file} ---")
+    print(f"\n--- AUDIT COMPLETE. Check {log_file} for line-by-line details. ---")
 
-if __name__ == "__main__": forge_system()
+if __name__ == "__main__":
+    forge_forensic_system()

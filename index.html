@@ -4,7 +4,7 @@
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
   <title>
-   {{TITLE}} | UkrGeekLife
+   Home
   </title>
   <script src="https://cdn.tailwindcss.com">
   </script>
@@ -14,6 +14,9 @@
         .glass { background: rgba(0, 255, 65, 0.05); border: 1px solid rgba(0, 255, 65, 0.2); backdrop-filter: blur(10px); }
         .nav-link:hover { color: var(--matrix-green); border-bottom: 1px solid var(--matrix-green); }
         .terminal-btn { width: 12px; height: 12px; border-radius: 50%; display: inline-block; margin-right: 5px; }
+  </style>
+  <style id="inc-style">
+   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=JetBrains+Mono&display=swap'); body { font-family: 'Inter', sans-serif; } .terminal-text { font-family: 'JetBrains Mono', monospace; color: #00ff41; }
   </style>
  </head>
  <body class="min-h-screen flex flex-col">
@@ -37,9 +40,12 @@
    </nav>
   </header>
   <main class="flex-grow p-4 md:p-12" id="app_content">
-   <h1>
-    System Online. Welcome, Andrii.
+   <h1 class="terminal-text text-5xl">
+    SYSTEM_READY
    </h1>
+   <p class="text-xl">
+    Ласкаво просимо до Конструкту. Інклюзивність та швидкість — наш стандарт.
+   </p>
   </main>
   <footer class="p-10 border-t border-gray-900 glass text-center">
    <div class="mb-4">
@@ -51,9 +57,9 @@
     </span>
    </div>
    <p class="text-xs text-gray-500 uppercase tracking-widest">
-    © 2025 ALL RIGHTS RESERVED BY ANDRII IVAS.
+    Â© 2025 ALL RIGHTS RESERVED BY ANDRII IVAS.
     <br/>
-    ЦЕЙ САЙТ ПРАЦЮЄ КРАЩЕ, НІЖ МОСКОВСЬКА ЕКОНОМІКА.
+    Ð¦Ð•Ð™ Ð¡ÐÐ™Ð¢ ÐŸÐ ÐÐ¦Ð®Ð„ ÐšÐ ÐÐ©Ð•, ÐÐ†Ð– ÐœÐžÐ¡ÐšÐžÐ’Ð¡Ð¬ÐšÐ Ð•ÐšÐžÐÐžÐœÐ†ÐšÐ.
     <br/>
     <span class="text-green-800">
      NO MEAT. NO SEAFOOD. NO RUSSIANS. ONLY CODE.
@@ -63,5 +69,92 @@
   <script>
    if(navigator.language.includes('ru')){window.location.href='https://war.ukraine.ua/';}
   </script>
+  <footer class="mt-20 border-t border-green-900 bg-black p-10 font-mono text-xs uppercase tracking-widest text-gray-500">
+   <div class="container mx-auto grid grid-cols-1 gap-10 md:grid-cols-4">
+    <div>
+     <h3 class="mb-4 font-bold text-green-500">
+      Operator: Andrii Ivas
+     </h3>
+     <p>
+      Status: Human
+     </p>
+     <p>
+      Diet: Vegetarian (10y+)
+     </p>
+     <p class="mt-4 text-red-600">
+      Region: Ukraine (Slava Ukraini)
+     </p>
+    </div>
+    <div>
+     <h3 class="mb-4 font-bold text-white">
+      Sitemap.sys
+     </h3>
+     <ul class="space-y-2">
+      <li>
+       <a class="hover:text-green-500" href="index.html">
+        &gt; Home
+       </a>
+      </li>
+      <li>
+       <a class="hover:text-green-400" href="about.html">
+        &gt; About Me
+       </a>
+      </li>
+      <li>
+       <a class="hover:text-green-400" href="projects.html">
+        &gt; Projects
+       </a>
+      </li>
+      <li>
+       <a class="hover:text-green-400" href="contact.html">
+        &gt; Contact
+       </a>
+      </li>
+     </ul>
+    </div>
+    <div>
+     <h3 class="mb-4 font-bold text-white">
+      External_Nodes
+     </h3>
+     <ul class="space-y-2">
+      <li>
+       <a class="hover:text-blue-400" href="https://github.com/ivas-andre" target="_blank">
+        &gt; GitHub
+       </a>
+      </li>
+      <li>
+       <a class="hover:text-orange-400" href="https://stackoverflow.com" target="_blank">
+        &gt; Stack Overflow
+       </a>
+      </li>
+      <li>
+       <a class="hover:text-red-500" href="https://youtube.com" target="_blank">
+        &gt; YouTube Channel
+       </a>
+      </li>
+     </ul>
+    </div>
+    <div class="glass p-4 border border-gray-800">
+     <h3 class="mb-2 font-bold text-yellow-500">
+      AI_DISCLOSURE
+     </h3>
+     <p class="leading-relaxed">
+      This site is architected using AI tools (Gemini/GPT). I believe AI is a powerful multiplier, not a replacement for human logic. Total automation achieved.
+     </p>
+    </div>
+   </div>
+   <div class="mt-10 flex flex-col justify-between items-center border-t border-gray-900 pt-6 md:flex-row">
+    <p class="hover:text-white cursor-help" title="Click for Easter Egg">
+     © 2025 ALL RIGHTS RESERVED. ANDRII IVAS.
+    </p>
+    <div class="flex gap-4 mt-4 md:mt-0">
+     <span class="h-3 w-3 rounded-full bg-red-600 animate-pulse" title="System Status: Online">
+     </span>
+     <span class="text-green-900">
+      VER: 1.2.0_STABLE
+     </span>
+    </div>
+   </div>
+  </footer>
  </body>
 </html>

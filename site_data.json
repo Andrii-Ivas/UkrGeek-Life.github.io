@@ -1,6 +1,10 @@
 {
+  "project": "UkrGeekLife v1.0",
+  "author": "Andrii Ivas",
+  "global_keywords": "Andrii Ivas, Automation, Inclusive Design, Matrix, Space Odyssey, Ukraine",
   "pages": [
-    { "name": "about", "title": "About Me", "content": "<section class='terminal-style'><h1>Хто я?</h1><p>Вегетаріанець 10 років. Патріот. Гік.</p></section>" },
-    { "name": "contact", "title": "Terminal Contact", "content": "<div class='terminal-window'><div class='btns'><span class='r'></span><span class='y'></span><span class='g'></span></div><p>FB: ivas.andre</p><p>IG: ivas_andre</p></div>" }
+    { "name": "index", "title": "Mainframe", "content": "<h1 class='terminal-text text-5xl'>SYSTEM_READY</h1><p class='text-xl'>Ласкаво просимо до Конструкту. Інклюзивність та швидкість — наш стандарт.</p>" },
+    { "name": "about", "title": "About Me", "content": "<div class='glass p-8'><h2 class='terminal-text'>IDENTITY_NODE</h2><p>10 років вегетаріанець. UX Архітектор. Патріот.</p></div>" },
+    { "name": "contact", "title": "Secure Comms", "content": "<div class='terminal-window'><div class='dots'><span class='r'></span><span class='y'></span><span class='g'></span></div><p>root@ivas:~$ connect socials</p><ul><li>GitHub: ivas-andre</li><li>IG: ivas_andre</li></ul></div>" }
   ]
 }
