@@ -1,94 +1,80 @@
-﻿
 <!DOCTYPE html>
 <html lang="uk">
  <head>
   <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
   <title>
-   Контакти
+   {{TITLE}} | UkrGeekLife
   </title>
-  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
-  <link href="./css/styles.css" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <style>
+   :root { --matrix-green: #00ff41; }
+        body { background: #000; color: #fff; font-family: 'Courier New', monospace; }
+        .glass { background: rgba(0, 255, 65, 0.05); border: 1px solid rgba(0, 255, 65, 0.2); backdrop-filter: blur(10px); }
+        .nav-link:hover { color: var(--matrix-green); border-bottom: 1px solid var(--matrix-green); }
+        .terminal-btn { width: 12px; height: 12px; border-radius: 50%; display: inline-block; margin-right: 5px; }
+  </style>
  </head>
- <body class="futuristic-dark">
-  <nav class="navbar navbar-inverse navbar-fixed-top">
-   <div class="container">
-    <div class="navbar-header">
-     <button class="navbar-toggle collapsed" data-target="#navbar-main" data-toggle="collapse" type="button">
-      <span class="icon-bar">
-      </span>
-      <span class="icon-bar">
-      </span>
-      <span class="icon-bar">
-      </span>
-     </button>
-     <a class="navbar-brand" href="./index.html" style="color: #22c55e; font-weight:bold;">
-      UKR GEEK LIFE
-     </a>
-    </div>
-    <div class="collapse navbar-collapse" id="navbar-main">
-     <ul class="nav navbar-nav navbar-right">
-      <li>
-       <a href="./index.html">
-        <i class="fa fa-home">
-        </i>
-        Головна
-       </a>
-      </li>
-      <li>
-       <a href="./about.html">
-        <i class="fa fa-user">
-        </i>
-        Про Мене
-       </a>
-      </li>
-      <li>
-       <a href="./projects.html">
-        <i class="fa fa-code">
-        </i>
-        Проєкти
-       </a>
-      </li>
-      <li>
-       <a href="./motivation.html">
-        <i class="fa fa-bolt">
-        </i>
-        Мотивація
-       </a>
-      </li>
-      <li>
-       <a href="./contact.html">
-        <i class="fa fa-envelope">
-        </i>
-        Контакти
-       </a>
-      </li>
-     </ul>
-    </div>
+ <body class="min-h-screen flex flex-col">
+  <header class="p-6 glass sticky top-0 z-50 flex justify-between items-center border-b border-green-900">
+   <div class="text-green-500 font-bold tracking-tighter">
+    ANDRII_IVAS_OS v0.5.0
    </div>
-  </nav>
-  <div class="container" style="margin-top: 100px; min-height: 80vh;">
-   <div class="geek-card animated fadeIn">
-    <h1 class="text-success">
-     Головна | UkrGeek-Life
-    </h1>
-    <hr style="border-color: #22c55e;"/>
+   <nav class="flex gap-6 text-xs font-bold uppercase">
+    <a class="nav-link" href="./index.html">
+     HOME
+    </a>
+    <a class="nav-link" href="./about.html">
+     ABOUT
+    </a>
+    <a class="nav-link" href="./projects.html">
+     PROJECTS
+    </a>
+    <a class="nav-link text-green-400" href="./contact.html">
+     CONTACT
+    </a>
+   </nav>
+  </header>
+  <main class="flex-grow p-4 md:p-12" id="app_content">
+   <div class="terminal-window">
+    <div class="btns">
+     <span class="r">
+     </span>
+     <span class="y">
+     </span>
+     <span class="g">
+     </span>
+    </div>
     <p>
-     Контент для розділу "index" у розробці...
+     FB: ivas.andre
+    </p>
+    <p>
+     IG: ivas_andre
     </p>
    </div>
-  </div>
-  <footer class="text-center" style="padding: 20px; color: #64748b;">
-   <p>
-    © 2025 UkrGeek-Life. Слава Україні! 🇺🇦
+  </main>
+  <footer class="p-10 border-t border-gray-900 glass text-center">
+   <div class="mb-4">
+    <span class="terminal-btn bg-red-500">
+    </span>
+    <span class="terminal-btn bg-yellow-500">
+    </span>
+    <span class="terminal-btn bg-green-500">
+    </span>
+   </div>
+   <p class="text-xs text-gray-500 uppercase tracking-widest">
+    © 2025 ALL RIGHTS RESERVED BY ANDRII IVAS.
+    <br/>
+    ЦЕЙ САЙТ ПРАЦЮЄ КРАЩЕ, НІЖ МОСКОВСЬКА ЕКОНОМІКА.
+    <br/>
+    <span class="text-green-800">
+     NO MEAT. NO SEAFOOD. NO RUSSIANS. ONLY CODE.
+    </span>
    </p>
   </footer>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js">
-  </script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">
-  </script>
-  <script src="./js/scripts.js">
+  <script>
+   if(navigator.language.includes('ru')){window.location.href='https://war.ukraine.ua/';}
   </script>
  </body>
 </html>

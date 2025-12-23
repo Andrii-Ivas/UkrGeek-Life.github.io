@@ -1,14 +1,6 @@
 {
   "pages": [
-    {
-      "name": "login",
-      "title": "Вхід",
-      "content": "<div class='glass'><h2>Secure Login</h2><button id='login-submit'>Biometric Scan</button></div>"
-    },
-    {
-      "name": "contact",
-      "title": "Контакти",
-      "content": "<h1>Зв'язок</h1><p>GitHub: ivas-andre</p>"
-    }
+    { "name": "about", "title": "About Me", "content": "<section class='terminal-style'><h1>Хто я?</h1><p>Вегетаріанець 10 років. Патріот. Гік.</p></section>" },
+    { "name": "contact", "title": "Terminal Contact", "content": "<div class='terminal-window'><div class='btns'><span class='r'></span><span class='y'></span><span class='g'></span></div><p>FB: ivas.andre</p><p>IG: ivas_andre</p></div>" }
   ]
 }

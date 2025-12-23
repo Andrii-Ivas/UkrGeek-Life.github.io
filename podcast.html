@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="uk">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   UkrGeek Podcast
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <style>
+   :root { --matrix-green: #00ff41; --hal-red: #ff0000; }
+        body { background: #000; color: #fff; font-family: 'Helvetica', sans-serif; }
+        .matrix-text { font-family: 'Courier New', monospace; color: var(--matrix-green); }
+        .glass { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(12px); border: 1px solid rgba(0, 255, 65, 0.2); }
+        .hal-search { border: 2px solid var(--hal-red); box-shadow: 0 0 10px var(--hal-red); }
+  </style>
+ </head>
+ <body class="min-h-screen flex flex-col">
+  <header class="p-6 glass flex justify-between items-center sticky top-0 z-50">
+   <div class="matrix-text font-bold text-2xl tracking-tighter">
+    UKRGEEKLIFE v0.2.7
+   </div>
+   <nav class="hidden md:flex space-x-8 uppercase text-xs tracking-widest font-bold">
+    <a class="hover:text-green-400" href="index.html">
+     Home
+    </a>
+    <a class="hover:text-green-400" href="about.html">
+     About
+    </a>
+    <a class="hover:text-green-400" href="projects.html">
+     Projects
+    </a>
+    <a class="hover:text-green-400" href="nation.html">
+     Nation
+    </a>
+    <a class="hover:text-green-400" href="podcast.html">
+     Podcast
+    </a>
+    <a class="hover:text-green-400" href="blog.html">
+     Blog
+    </a>
+   </nav>
+   <div class="flex items-center space-x-4">
+    <input class="bg-black border border-red-600 p-1 text-xs text-red-500 focus:outline-none hal-search" placeholder="SEARCH_SYSTEM..." type="text"/>
+   </div>
+  </header>
+  <main class="flex-grow container mx-auto py-16 px-6" id="app_content">
+   <h1>
+    Voice of the Machine
+   </h1>
+   <p>
+    Обговорення технологій та майбутнього.
+   </p>
+  </main>
+  <footer class="p-10 border-t border-gray-900 text-center text-xs matrix-text opacity-40">
+   <p>
+    TERMINAL_ACCESS: GRANTED | NO_RUSSIANS_ALLOWED | SLAVA UKRAINI
+   </p>
+  </footer>
+ </body>
+</html>
