@@ -190,3 +190,57 @@ loginBtn.addEventListener('mouseover', () => {
 if (navigator.language === 'ru' || navigator.language === 'ru-RU') {
     window.location.href = "https://war.ukraine.ua/";
 }
+
+// UkrGeekLife | Matrix Loader | Core
+const canvas = document.createElement('canvas');
+const ctx = canvas.getContext('2d');
+
+// Налаштування на весь екран
+canvas.height = window.innerHeight;
+canvas.width = window.innerWidth;
+canvas.style.position = 'fixed';
+canvas.style.top = '0';
+canvas.style.left = '0';
+canvas.style.zIndex = '-1'; // На задньому фоні
+document.body.appendChild(canvas);
+
+// Українська Матриця
+const ukrChars = "ҐЄІЇАБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЬЮЯ0123456789";
+const characters = ukrChars.split("");
+
+const fontSize = 14;
+const columns = canvas.width / fontSize; 
+
+// Масив для крапель
+const drops = [];
+for (let x = 0; x < columns; x++) {
+    drops[x] = 1;
+}
+
+function draw() {
+    // Напівпрозорий чорний фон для ефекту сліду
+    ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = "#0F0"; // Зелений хакерський
+    ctx.font = fontSize + "px monospace";
+
+    for (let i = 0; i < drops.length; i++) {
+        const text = characters[Math.floor(Math.random() * characters.length)];
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+            drops[i] = 0;
+        }
+        drops[i]++;
+    }
+}
+
+// Запуск анімації
+setInterval(draw, 33);
+
+// Адаптація під розмір вікна
+window.addEventListener('resize', () => {
+    canvas.height = window.innerHeight;
+    canvas.width = window.innerWidth;
+});

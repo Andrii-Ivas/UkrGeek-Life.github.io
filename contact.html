@@ -19,159 +19,77 @@
    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=JetBrains+Mono&display=swap'); body { font-family: 'Inter', sans-serif; } .terminal-text { font-family: 'JetBrains Mono', monospace; color: #00ff41; }
   </style>
  </head>
- <body class="min-h-screen flex flex-col">
-  <header class="p-6 glass sticky top-0 z-50 flex justify-between items-center border-b border-green-900">
-   <div class="text-green-500 font-bold tracking-tighter">
-    ANDRII_IVAS_OS v0.5.0
-   </div>
-   <nav class="flex gap-6 text-xs font-bold uppercase">
-    <a class="nav-link" href="./index.html">
-     HOME
-    </a>
-    <a class="nav-link" href="./about.html">
-     ABOUT
-    </a>
-    <a class="nav-link" href="./projects.html">
-     PROJECTS
-    </a>
-    <a class="nav-link text-green-400" href="./contact.html">
-     CONTACT
-    </a>
-   </nav>
-  </header>
-  <main class="flex-grow p-4 md:p-12" id="app_content">
-   <div class="terminal-window">
-    <div class="dots">
-     <span class="r">
-     </span>
-     <span class="y">
-     </span>
-     <span class="g">
-     </span>
+<body>
+    <div class="terminal-container" style="padding: 20px; font-family: monospace; color: #00ff00; background: rgba(0,0,0,0.8); height: 100vh;">
+        <div id="history">
+            <p>UkrGeekLife OS [Version 1.0.25]</p>
+            <p>(c) 2025 Андрій Івась. Всі права захищено.</p>
+            <br>
+            <p>Введіть 'help' для списку команд.</p>
+            <br>
+        </div>
+        
+        <div class="input-line" style="display: flex;">
+            <span style="margin-right: 10px;">guest@ukrgeek:~$</span>
+            <input type="text" id="cmd" autofocus style="background: transparent; border: none; color: #00ff00; outline: none; width: 100%; font-family: monospace;">
+        </div>
     </div>
-    <p>
-     root@ivas:~$ connect socials
-    </p>
-    <ul>
-     <li>
-      GitHub: ivas-andre
-     </li>
-     <li>
-      IG: ivas_andre
-     </li>
-    </ul>
-   </div>
-  </main>
-  <footer class="p-10 border-t border-gray-900 glass text-center">
-   <div class="mb-4">
-    <span class="terminal-btn bg-red-500">
-    </span>
-    <span class="terminal-btn bg-yellow-500">
-    </span>
-    <span class="terminal-btn bg-green-500">
-    </span>
-   </div>
-   <p class="text-xs text-gray-500 uppercase tracking-widest">
-    Ã‚Â© 2025 ALL RIGHTS RESERVED BY ANDRII IVAS.
-    <br/>
-    ÃÂ¦Ãâ€¢Ãâ„¢ ÃÂ¡ÃÂÃâ„¢ÃÂ¢ ÃÅ¸ÃÂ ÃÂÃÂ¦ÃÂ®Ãâ€ž ÃÅ¡ÃÂ ÃÂÃÂ©Ãâ€¢, ÃÂÃâ€ Ãâ€“ ÃÅ“ÃÅ¾ÃÂ¡ÃÅ¡ÃÅ¾Ãâ€™ÃÂ¡ÃÂ¬ÃÅ¡ÃÂ Ãâ€¢ÃÅ¡ÃÅ¾ÃÂÃÅ¾ÃÅ“Ãâ€ ÃÅ¡ÃÂ.
-    <br/>
-    <span class="text-green-800">
-     NO MEAT. NO SEAFOOD. NO RUSSIANS. ONLY CODE.
-    </span>
-   </p>
-  </footer>
-  <script>
-   if(navigator.language.includes('ru')){window.location.href='https://war.ukraine.ua/';}
-  </script>
-  <footer class="mt-20 border-t border-green-900 bg-black p-10 font-mono text-xs uppercase tracking-widest text-gray-500">
-   <div class="container mx-auto grid grid-cols-1 gap-10 md:grid-cols-4">
-    <div>
-     <h3 class="mb-4 font-bold text-green-500">
-      Operator: Andrii Ivas
-     </h3>
-     <p>
-      Status: Human
-     </p>
-     <p>
-      Diet: Vegetarian (10y+)
-     </p>
-     <p class="mt-4 text-red-600">
-      Region: Ukraine (Slava Ukraini)
-     </p>
-    </div>
-    <div>
-     <h3 class="mb-4 font-bold text-white">
-      Sitemap.sys
-     </h3>
-     <ul class="space-y-2">
-      <li>
-       <a class="hover:text-green-500" href="index.html">
-        &gt; Home
-       </a>
-      </li>
-      <li>
-       <a class="hover:text-green-400" href="about.html">
-        &gt; About Me
-       </a>
-      </li>
-      <li>
-       <a class="hover:text-green-400" href="projects.html">
-        &gt; Projects
-       </a>
-      </li>
-      <li>
-       <a class="hover:text-green-400" href="contact.html">
-        &gt; Contact
-       </a>
-      </li>
-     </ul>
-    </div>
-    <div>
-     <h3 class="mb-4 font-bold text-white">
-      External_Nodes
-     </h3>
-     <ul class="space-y-2">
-      <li>
-       <a class="hover:text-blue-400" href="https://github.com/ivas-andre" target="_blank">
-        &gt; GitHub
-       </a>
-      </li>
-      <li>
-       <a class="hover:text-orange-400" href="https://stackoverflow.com" target="_blank">
-        &gt; Stack Overflow
-       </a>
-      </li>
-      <li>
-       <a class="hover:text-red-500" href="https://youtube.com" target="_blank">
-        &gt; YouTube Channel
-       </a>
-      </li>
-     </ul>
-    </div>
-    <div class="glass p-4 border border-gray-800">
-     <h3 class="mb-2 font-bold text-yellow-500">
-      AI_DISCLOSURE
-     </h3>
-     <p class="leading-relaxed">
-      This site is architected using AI tools (Gemini/GPT). I believe AI is a powerful multiplier, not a replacement for human logic. Total automation achieved.
-     </p>
-    </div>
-   </div>
-   <div class="mt-10 flex flex-col justify-between items-center border-t border-gray-900 pt-6 md:flex-row">
-    <p class="hover:text-white cursor-help" title="Click for Easter Egg">
-     Â© 2025 ALL RIGHTS RESERVED. ANDRII IVAS.
-    </p>
-    <div class="flex gap-4 mt-4 md:mt-0">
-     <span class="h-3 w-3 rounded-full bg-red-600 animate-pulse" title="System Status: Online">
-     </span>
-     <span class="text-green-900">
-      VER: 1.2.0_STABLE
-     </span>
-    </div>
-   </div>
-  </footer>
- </body>
+
+    <script src="js/matrix.js"></script>
+    <script>
+        const input = document.getElementById("cmd");
+        const history = document.getElementById("history");
+
+        input.addEventListener("keydown", function(event) {
+            if (event.key === "Enter") {
+                const command = input.value.trim().toLowerCase();
+                const output = document.createElement("p");
+                
+                // Logic
+                output.innerHTML = `<span style="opacity:0.7">guest@ukrgeek:~$</span> ${input.value}`;
+                history.appendChild(output);
+
+                const response = document.createElement("p");
+                response.style.color = "#fff"; // Відповідь білим
+                
+                switch(command) {
+                    case "help":
+                        response.innerHTML = "Доступні команди:<br> - about: Хто я<br> - email: Моя пошта<br> - github: Мій код<br> - clear: Очистити термінал<br> - slava: Героям Слава!";
+                        break;
+                    case "about":
+                        response.innerText = "Андрій Івась. IT-фахівець, Патріот, Архітектор автоматизації.";
+                        break;
+                    case "email":
+                        response.innerHTML = "<a href='mailto:contact@ukrgeek.life' style='color:#0ff'>contact@ukrgeek.life</a>";
+                        break;
+                    case "github":
+                        response.innerHTML = "Відкриваю GitHub...";
+                        window.open("https://github.com/ivas-andre", "_blank");
+                        break;
+                    case "slava":
+                        response.innerText = "ГЕРОЯМ СЛАВА! 🇺🇦";
+                        response.style.color = "yellow";
+                        break;
+                    case "clear":
+                        history.innerHTML = "";
+                        response.innerText = "";
+                        break;
+                    default:
+                        response.innerText = `Команду '${command}' не знайдено. Введіть 'help'.`;
+                        response.style.color = "red";
+                }
+                
+                if(command !== "clear") history.appendChild(response);
+                input.value = "";
+                window.scrollTo(0, document.body.scrollHeight);
+            }
+        });
+        
+        // Фокус завжди на вводі
+        document.body.addEventListener('click', () => input.focus());
+    </script>
+</body>
 </html>
+
 
 
