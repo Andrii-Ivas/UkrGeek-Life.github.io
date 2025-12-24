@@ -1,27 +1,44 @@
 <!DOCTYPE html>
-<html lang="uk">
-<head>
+<html lang="en"> <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Термінал | UkrGeekLife | Андрій Івась</title>
+    <title>Terminal | UkrGeekLife | Andrii Ivas</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <canvas id="matrix-bg"></canvas>
-    <header><div class="logo">UkrGeekLife | Андрій Івась</div>
+    <header><div class="logo">UkrGeekLife | Andrii Ivas</div>
 <nav role="navigation">
-    <a href="index.html">[ ГОЛОВНА ]</a>
-    <a href="about.html">[ ПРО МЕНЕ ]</a>
-    <a href="projects.html">[ ПРОЄКТИ ]</a>
-    <a href="contact.html">[ ТЕРМІНАЛ ]</a>
+    <a href="index.html">[ HOME ]</a>
+    <a href="about.html">[ IDENTITY ]</a>
+    <a href="projects.html">[ ARSENAL ]</a>
+    <a href="contact.html">[ TERMINAL ]</a>
 </nav>
 </header>
-    <main class="container"><h1>Terminal Access</h1><div class='terminal-window'><div id='history'><p>System Ready...</p></div><div class='input-line'><span class='prompt'>guest@ukrgeek:~$</span><input type='text' id='cmd' autofocus></div></div></main>
+    <main class="container">
+        <div id="typewriter-content">
+            <h1>Terminal Access</h1><div class='terminal-window'><div id='history'><p>UkrGeekLife OS v4.0 initialized...</p><p>Type 'help'...</p></div><div class='input-line'><span class='prompt'>guest@ukrgeek:~$</span><input type='text' id='cmd' autofocus></div></div>
+        </div>
+    </main>
     
 <footer>
-    <div>&copy; 2025 UkrGeekLife | Андрій Івась</div>
-    <div style="margin-top:10px;">
-        <a href="index.html">Main</a> | <a href="contact.html">Terminal</a>
+    <div class="footer-row">
+        <span class="hazard-zone" title="System Kernel: Stable">System Online</span> :: &copy; 2025 UkrGeekLife | Andrii Ivas
+    </div>
+    
+    <div class="footer-row footer-links">
+        <a href="index.html">/ROOT</a>
+        <a href="about.html">/BIN/WHOAMI</a>
+        <a href="projects.html">/VAR/WWW/PROJECTS</a>
+        <a href="contact.html">/DEV/STDIN</a>
+    </div>
+
+    <div class="footer-row zoo-counter">
+        Running on: 4 Cats, 2 Dogs, 1 Turtle, 1 Rat & 100L of Water.
+    </div>
+
+    <div class="irony">
+        "I automated this footer because I was too lazy to type it twice."
     </div>
 </footer>
 
@@ -37,8 +54,8 @@ if(input) {
             let res = "";
             switch(cmd) {
                 case "help": res = "COMMANDS: [about] [projects] [email] [slava] [clear]"; break;
-                case "about": res = "Andrii Ivas. Engineer. Patriot."; break;
-                case "projects": res = "Full Deploy System, Security Scripts."; break;
+                case "about": res = "Andrii Ivas. Vegetarian. Patriot. Automation Architect."; break;
+                case "projects": res = "GitHub: ivas-andre. Automation. Security."; break;
                 case "slava": res = "<span style='color:yellow'>GEROYAM SLAVA!</span>"; break;
                 case "clear": history.innerHTML = ""; break;
                 default: res = "<span style='color:red'>Command not found.</span>";
