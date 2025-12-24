@@ -3,7 +3,8 @@ const canvas = document.getElementById('matrix-bg');
 const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
-const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+// UKRAINIAN ALPHABET + DIGITS
+const chars = 'АБВГҐДЕЄЖЗИІЇЙКЛМНОПРСТУФХЦЧШЩЬЮЯ0123456789'.split('');
 const fontSize = 14; 
 const columns = canvas.width/fontSize;
 const drops = [];

@@ -1,27 +1,120 @@
 
-body { background-color: #000; color: #0F0; font-family: 'Courier New', monospace; margin: 0; padding: 0; min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; }
-#matrix-bg { position: fixed; top: 0; left: 0; z-index: -1; opacity: 0.15; }
-header { background: rgba(0, 20, 0, 0.95); border-bottom: 2px solid #0F0; padding: 15px 0; text-align: center; position: sticky; top: 0; z-index: 100; }
-.logo { font-size: 1.5rem; font-weight: bold; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 10px; text-shadow: 0 0 10px #0F0; display: block; }
-nav a { color: #FFF; text-decoration: none; margin: 0 10px; font-size: 1.1rem; font-weight: bold; transition: 0.3s; display: inline-block; }
-nav a:hover { color: #0F0; text-shadow: 0 0 8px #0F0; }
-.container { flex: 1; max-width: 900px; margin: 30px auto; padding: 20px; background: rgba(0, 0, 0, 0.8); border: 1px solid #333; width: 90%; box-sizing: border-box; }
-h1, h2 { border-bottom: 1px solid #0F0; padding-bottom: 10px; text-transform: uppercase; word-wrap: break-word; }
-p, li { font-size: 1.1rem; line-height: 1.6; }
-.red-alert { color: #FF3333; font-weight: bold; }
-.alert { border: 1px solid #F00; padding: 10px; color: #F00; background: rgba(50,0,0,0.3); margin: 20px 0; }
-.highlight { color: #FFF; font-weight: bold; }
-footer { border-top: 2px solid #0F0; background: #020202; text-align: center; padding: 20px; margin-top: auto; font-size: 0.9rem; color: #666; }
-.footer-links a { color: #AAA; text-decoration: none; margin: 0 8px; font-weight: bold; }
-.footer-links a:hover { color: #0F0; text-decoration: underline; }
-.zoo-counter { color: #004400; font-size: 0.85rem; letter-spacing: 1px; margin-top: 10px; }
-.irony { font-style: italic; color: #444; font-size: 0.75rem; margin-top: 5px; }
-.cursor::after { content: '█'; animation: blink 1s infinite; color: #0F0; margin-left: 5px; }
-@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
-/* TERMINAL FIXES */
-.terminal-window { background: #111; border: 1px solid #0F0; padding: 15px; height: 50vh; overflow-y: auto; font-family: 'Courier New', monospace; font-size: 1rem; }
-.input-line { display: flex; align-items: center; }
-.prompt { color: #0F0; margin-right: 10px; font-weight: bold; white-space: nowrap; }
-input#cmd { background: transparent; border: none; color: #FFF; font-family: 'Courier New', monospace; font-size: 1rem; flex-grow: 1; outline: none; width: 100%; }
-#typewriter-content { visibility: hidden; }
-@media (max-width: 600px) { .logo { font-size: 1.2rem; } nav a { font-size: 0.9rem; margin: 0 5px; } .container { width: 95%; margin: 10px auto; padding: 15px; } }
+/* RESET & BASE */
+body { 
+    background-color: #050505; 
+    color: #0F0; 
+    font-family: 'Courier New', monospace; 
+    margin: 0; padding: 0; 
+    min-height: 100vh; 
+    display: flex; flex-direction: column; 
+    overflow-x: hidden;
+    transition: filter 0.3s ease;
+}
+#matrix-bg { position: fixed; top: 0; left: 0; z-index: -1; opacity: 0.15; pointer-events: none; }
+
+/* LINUX WINDOW HEADER */
+header {
+    background: #1a1a1a;
+    border-bottom: 1px solid #333;
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky; top: 0; z-index: 1000;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+}
+.window-controls { display: flex; gap: 8px; }
+.dot { width: 12px; height: 12px; border-radius: 50%; cursor: pointer; transition: 0.2s; }
+.dot.red { background: #ff5f56; } .dot.red:hover { box-shadow: 0 0 10px #f00; }
+.dot.yellow { background: #ffbd2e; } .dot.yellow:hover { box-shadow: 0 0 10px #ff0; }
+.dot.green { background: #27c93f; } .dot.green:hover { box-shadow: 0 0 10px #0f0; }
+.window-title { color: #888; font-size: 0.9rem; font-weight: bold; }
+
+/* BURGER MENU (THE HACKER WAY) */
+.burger-menu { cursor: pointer; display: flex; flex-direction: column; gap: 4px; z-index: 1001; }
+.line { width: 25px; height: 3px; background: #0F0; transition: 0.3s; }
+.burger-menu.active .line:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); background: #F00; }
+.burger-menu.active .line:nth-child(2) { opacity: 0; }
+.burger-menu.active .line:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); background: #F00; }
+
+/* NAVIGATION PANEL (MOBILE HIDDEN) */
+nav {
+    position: fixed; top: 50px; right: -100%;
+    width: 250px; height: 100vh;
+    background: rgba(0, 10, 0, 0.95);
+    border-left: 1px solid #0F0;
+    display: flex; flex-direction: column;
+    padding-top: 20px;
+    transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: -10px 0 30px rgba(0,0,0,0.8);
+}
+nav.active { right: 0; }
+nav a {
+    color: #FFF; text-decoration: none;
+    padding: 15px 20px;
+    border-bottom: 1px solid #030;
+    font-size: 1.1rem;
+    transition: 0.2s;
+}
+nav a:hover { background: #002200; padding-left: 30px; color: #0F0; }
+nav a::before { content: '> '; opacity: 0; }
+nav a:hover::before { opacity: 1; }
+
+/* DESKTOP NAV (Fallback if needed, but we use burger primarily now or hybrid) */
+@media(min-width: 768px) {
+    nav { 
+        position: static; width: auto; height: auto; 
+        background: transparent; border: none; 
+        flex-direction: row; box-shadow: none;
+        padding-top: 0;
+    }
+    nav a { border: none; padding: 0 15px; font-size: 1rem; }
+    nav a:hover { background: transparent; padding-left: 15px; text-shadow: 0 0 5px #0F0; }
+    .burger-menu { display: none; }
+}
+@media(max-width: 767px) {
+    .window-title { display: none; } /* Save space on mobile */
+}
+
+/* MAIN CONTENT */
+.container { 
+    flex: 1; max-width: 900px; margin: 30px auto; padding: 20px; 
+    border: 1px solid #333; 
+    background: rgba(0, 0, 0, 0.85); 
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.05);
+}
+h1 { border-bottom: 2px solid #0F0; padding-bottom: 5px; color: #FFF; }
+.red-alert { color: #FF3333; text-shadow: 0 0 5px #F00; }
+.alert { border: 1px solid #F00; background: rgba(50,0,0,0.2); padding: 10px; color: #F88; }
+.highlight { color: #FFF; font-weight: bold; background: #003300; padding: 2px 5px; }
+
+/* FOOTER (THE ZOO RETURNS - CYBER EDITION) */
+footer {
+    background: #000; border-top: 1px dashed #0F0;
+    padding: 20px; text-align: center; font-size: 0.8rem;
+    color: #555; position: relative;
+    overflow: hidden;
+}
+footer:hover { color: #888; }
+.zoo-list { color: #006600; margin-bottom: 5px; cursor: help; }
+.zoo-list:hover { color: #0F0; }
+.ip-trace { font-family: monospace; color: #333; margin-top: 5px; }
+
+/* EASTER EGG CLASSES */
+.hidden-trigger { cursor: crosshair; }
+.hidden-trigger:active { color: red; }
+.shutdown-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: #000; color: #F00;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    z-index: 9999; display: none;
+}
+
+/* PRELOADER */
+#preloader {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: #000; z-index: 9999;
+    display: flex; align-items: center; justify-content: center;
+    color: #0F0; font-size: 1.5rem; transition: opacity 1s;
+}
+.loaded { opacity: 0; pointer-events: none; }

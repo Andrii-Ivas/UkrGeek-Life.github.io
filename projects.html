@@ -1,48 +1,75 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Arsenal | UkrGeekLife | Andrii Ivas</title><link rel="stylesheet" href="css/style.css"></head><body><canvas id="matrix-bg"></canvas><header><div class="logo">UkrGeekLife | Andrii Ivas</div>
-<nav role="navigation">
-    <a href="index.html">[ HOME ]</a>
-    <a href="about.html">[ IDENTITY ]</a>
-    <a href="projects.html">[ ARSENAL ]</a>
-    <a href="contact.html">[ TERMINAL ]</a>
-</nav>
-</header><main class="container"><div id="typewriter-content">
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Arsenal | UkrGeekLife | Andrii Ivas</title><link rel="stylesheet" href="css/style.css"></head><body>
+    <div id="preloader"><div style="text-align:center">INITIALIZING PROTOCOL<br><span style="font-size:0.8rem">LOADING MODULES...</span></div></div>
+    
+<div id="shutdown-overlay" class="shutdown-overlay">
+    <h1 style="color:red; font-size: 3rem;">SIGNAL LOST</h1>
+    <p id="shutdown-timer">TERMINATING SESSION...</p>
+</div>
+
+    <canvas id="matrix-bg"></canvas>
+    
+<header>
+    <div class="window-controls">
+        <div class="dot red" onclick="killSystem()" title="Close Connection"></div>
+        <div class="dot yellow" onclick="minimizeSystem()" title="Minimize"></div>
+        <div class="dot green" onclick="maximizeSystem()" title="Fullscreen"></div>
+    </div>
+    <div class="window-title">root@ukrgeek:~</div>
+    <div class="burger-menu" onclick="toggleMenu()">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+    </div>
+    <nav>
+        <a href="index.html">/HOME</a>
+        <a href="about.html">/IDENTITY</a>
+        <a href="projects.html">/ARSENAL</a>
+        <a href="contact.html">/TERMINAL</a>
+    </nav>
+</header>
+
+    <main class="container"><div id="typewriter-content">
 <h1>THE ARSENAL: WEAPONS OF MASS CREATION</h1>
 <p>I don't just write code. I build reality. Більшість моїх проектів будуть <strong>Open Source</strong> і безкоштовними. Чому? Бо я можу.</p>
 <p>Coming Soon / In Progress:</p>
-
 <h2>1. ENGINEERING & HARDWARE</h2>
 <ul>
     <li><strong>Growing Box Building:</strong> Повна автоматизація гідропоніки. Свіжа їжа вдома. No chemicals, just logic.</li>
     <li><strong>Lighting Building:</strong> DIY Smart Light. Керування спектром, яскравістю і таймінгами. Not cheap Chinese crap.</li>
     <li><strong>Global Box:</strong> Модульне будівництво. Універсальні конструкції. My architecture vision.</li>
 </ul>
-
 <h2>2. SOCIAL & BIO SECTOR</h2>
 <ul>
     <li><strong>Volunteer Cats Helping:</strong> Соціальне волонтерство. Коти не вміють просити про допомогу, тому я роблю це за них.</li>
     <li><strong>Social Voluntar:</strong> Допомога тим, хто реально потребує, а не піариться.</li>
 </ul>
-
 <h2>3. THE COMMUNITY (MY CULT)</h2>
 <ul>
     <li><strong>Smart Community Building:</strong> Я будую спільноту для розумних людей.</li>
     <li><strong>Entry Rule:</strong> It doesn't matter who you are. Gay, straight, alien, black, white — I don't give a fuck.</li>
     <li><strong>Condition:</strong> Just be smart. Думай головою. Idiots are banned properly.</li>
 </ul>
-
-<div class="alert">
-    <strong>STATUS:</strong> Most repos are currently private. Preparing for public release. Wait for it.
-</div>
+<div class="alert"><strong>STATUS:</strong> Most repos are currently private. Preparing for public release. Wait for it.</div>
 </div></main>
+    
 <footer>
-    <div>System Online :: &copy; 2025 UkrGeekLife | Andrii Ivas</div>
-    <div class="footer-links">
-        <a href="index.html">/ROOT</a>
-        <a href="about.html">/BIN/WHOAMI</a>
-        <a href="projects.html">/VAR/WWW/ARSENAL</a>
-        <a href="contact.html">/DEV/STDIN</a>
+    <div class="zoo-list" title="My support team">
+        [ SYSTEM RESOURCES: 4 CATS | 2 DOGS | 1 RAT | 1 TURTLE | 100L WATER ]
     </div>
-    <div class="zoo-counter">Running on: 4 Cats, 2 Dogs, 1 Turtle, 1 Rat & 100L Aquarium.</div>
-    <div class="irony">"I automated this footer because manual typing is a bug."</div>
+    <div style="margin: 10px 0;">
+        &copy; 2025 UkrGeekLife | Andrii Ivas | NO FORGIVENESS
+    </div>
+    <div class="ip-trace" id="fake-ip">Trace pending...</div>
+    <div class="irony" style="font-size: 0.6rem; margin-top:10px; opacity: 0.5;">
+        "If you are looking for cookies, I ate them."
+    </div>
     </footer>
-<script src="js/matrix.js"></script><script src='js/typewriter.js'></script></body></html>
+
+    <script src="js/main.js"></script>
+    <script src='js/typewriter.js'></script>
+    <script>
+        window.addEventListener('load', () => {
+            setTimeout(() => { document.getElementById('preloader').classList.add('loaded'); }, 1500);
+        });
+    </script>
+</body></html>

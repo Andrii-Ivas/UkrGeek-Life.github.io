@@ -1,64 +1,77 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Terminal | UkrGeekLife | Andrii Ivas</title><link rel="stylesheet" href="css/style.css"></head><body><canvas id="matrix-bg"></canvas><header><div class="logo">UkrGeekLife | Andrii Ivas</div>
-<nav role="navigation">
-    <a href="index.html">[ HOME ]</a>
-    <a href="about.html">[ IDENTITY ]</a>
-    <a href="projects.html">[ ARSENAL ]</a>
-    <a href="contact.html">[ TERMINAL ]</a>
-</nav>
-</header><main class="container"><div id="typewriter-content"><h1>Terminal Access</h1><div class='terminal-window'><div id='history'><p>UkrGeekLife OS v10.0 (Arsenal Loaded)...</p></div><div class='input-line'><span class='prompt'>guest@ukrgeek:~$</span><input type='text' id='cmd' autofocus autocomplete='off' enterkeyhint='go'></div></div></div></main>
-<footer>
-    <div>System Online :: &copy; 2025 UkrGeekLife | Andrii Ivas</div>
-    <div class="footer-links">
-        <a href="index.html">/ROOT</a>
-        <a href="about.html">/BIN/WHOAMI</a>
-        <a href="projects.html">/VAR/WWW/ARSENAL</a>
-        <a href="contact.html">/DEV/STDIN</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Terminal | UkrGeekLife | Andrii Ivas</title><link rel="stylesheet" href="css/style.css"></head><body>
+    <div id="preloader"><div style="text-align:center">INITIALIZING PROTOCOL<br><span style="font-size:0.8rem">LOADING MODULES...</span></div></div>
+    
+<div id="shutdown-overlay" class="shutdown-overlay">
+    <h1 style="color:red; font-size: 3rem;">SIGNAL LOST</h1>
+    <p id="shutdown-timer">TERMINATING SESSION...</p>
+</div>
+
+    <canvas id="matrix-bg"></canvas>
+    
+<header>
+    <div class="window-controls">
+        <div class="dot red" onclick="killSystem()" title="Close Connection"></div>
+        <div class="dot yellow" onclick="minimizeSystem()" title="Minimize"></div>
+        <div class="dot green" onclick="maximizeSystem()" title="Fullscreen"></div>
     </div>
-    <div class="zoo-counter">Running on: 4 Cats, 2 Dogs, 1 Turtle, 1 Rat & 100L Aquarium.</div>
-    <div class="irony">"I automated this footer because manual typing is a bug."</div>
+    <div class="window-title">root@ukrgeek:~</div>
+    <div class="burger-menu" onclick="toggleMenu()">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+    </div>
+    <nav>
+        <a href="index.html">/HOME</a>
+        <a href="about.html">/IDENTITY</a>
+        <a href="projects.html">/ARSENAL</a>
+        <a href="contact.html">/TERMINAL</a>
+    </nav>
+</header>
+
+    <main class="container"><div id="typewriter-content"><h1>Terminal Access</h1><div class='terminal-window'><div id='history'><p>UkrGeekLife OS v12.0 (Red Button Edition)...</p></div><div class='input-line'><span class='prompt'>root@ukrgeek:~#</span><input type='text' id='cmd' autofocus autocomplete='off' enterkeyhint='go'></div></div></div></main>
+    
+<footer>
+    <div class="zoo-list" title="My support team">
+        [ SYSTEM RESOURCES: 4 CATS | 2 DOGS | 1 RAT | 1 TURTLE | 100L WATER ]
+    </div>
+    <div style="margin: 10px 0;">
+        &copy; 2025 UkrGeekLife | Andrii Ivas | NO FORGIVENESS
+    </div>
+    <div class="ip-trace" id="fake-ip">Trace pending...</div>
+    <div class="irony" style="font-size: 0.6rem; margin-top:10px; opacity: 0.5;">
+        "If you are looking for cookies, I ate them."
+    </div>
     </footer>
-<script src="js/matrix.js"></script>
+
+    <script src="js/main.js"></script>
+    
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         const input = document.getElementById("cmd");
         const history = document.getElementById("history");
-        
         if(input) {
-            // Force focus on load and click
             input.focus();
             document.querySelector('.terminal-window').addEventListener('click', () => input.focus());
-            
             input.addEventListener("keydown", function(e) {
                 if (e.key === "Enter") {
                     const rawCmd = input.value.trim();
                     const cmd = rawCmd.toLowerCase();
-                    
-                    history.innerHTML += `<div><span class="prompt">guest@ukrgeek:~$</span> ${rawCmd}</div>`;
-                    
+                    history.innerHTML += `<div><span class="prompt">root@ukrgeek:~#</span> ${rawCmd}</div>`;
                     let res = "";
                     switch(cmd) {
-                        case "help": 
-                            res = "Available: [about] [projects] [email] [slava] [clear]"; break;
-                        case "about": 
-                            res = "See Identity page (/BIN/WHOAMI)."; break;
-                        case "projects": 
-                            res = "See Arsenal page. Open Source & Hardware."; break;
-                        case "email": 
-                            res = "contact@ukrgeek.life"; break;
-                        case "slava": 
-                            res = "<span style='color:yellow; font-weight:bold;'>GEROYAM SLAVA! 🇺🇦</span>"; break;
-                        case "russia": 
-                            res = "<span style='color:red; font-weight:bold;'>ERROR 403: TERRORIST STATE DETECTED. BLOCKING CONNECTION.</span>"; break;
-                        case "clear": 
-                            history.innerHTML = ""; break;
+                        case "help": res = "COMMANDS: [about] [projects] [email] [slava] [sudo rm -rf /]"; break;
+                        case "about": res = "Redirecting to Identity..."; setTimeout(()=>window.location='about.html', 1000); break;
+                        case "projects": res = "Accessing Arsenal..."; setTimeout(()=>window.location='projects.html', 1000); break;
+                        case "slava": res = "<span style='color:yellow; font-weight:bold;'>GEROYAM SLAVA! 🇺🇦</span>"; break;
+                        case "russia": res = "<span style='color:red; font-weight:bold; font-size: 1.5em;'>FATAL ERROR: BIOWASTE DETECTED. PURGING...</span>"; break;
+                        case "clear": history.innerHTML = ""; break;
+                        case "sudo rm -rf /": res = "Nice try, kid. Permission Denied."; break;
                         case "": res = ""; break;
-                        default: res = `<span style='color:red'>Command '${rawCmd}' not found. Try 'help'.</span>`;
+                        default: res = `<span style='color:red'>bash: ${rawCmd}: command not found</span>`;
                     }
-                    
                     if(cmd !== "clear" && res !== "") {
                         history.innerHTML += `<div style='margin-bottom:10px; color:#DDD; line-height:1.4;'>${res}</div>`;
                     }
-                    
                     input.value = "";
                     const win = document.querySelector('.terminal-window');
                     win.scrollTop = win.scrollHeight;
@@ -67,4 +80,10 @@
         }
     });
 </script>
+
+    <script>
+        window.addEventListener('load', () => {
+            setTimeout(() => { document.getElementById('preloader').classList.add('loaded'); }, 1500);
+        });
+    </script>
 </body></html>

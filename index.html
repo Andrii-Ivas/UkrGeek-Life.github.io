@@ -1,15 +1,37 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Home | UkrGeekLife | Andrii Ivas</title><link rel="stylesheet" href="css/style.css"></head><body><canvas id="matrix-bg"></canvas><header><div class="logo">UkrGeekLife | Andrii Ivas</div>
-<nav role="navigation">
-    <a href="index.html">[ HOME ]</a>
-    <a href="about.html">[ IDENTITY ]</a>
-    <a href="projects.html">[ ARSENAL ]</a>
-    <a href="contact.html">[ TERMINAL ]</a>
-</nav>
-</header><main class="container"><div id="typewriter-content">
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Home | UkrGeekLife | Andrii Ivas</title><link rel="stylesheet" href="css/style.css"></head><body>
+    <div id="preloader"><div style="text-align:center">INITIALIZING PROTOCOL<br><span style="font-size:0.8rem">LOADING MODULES...</span></div></div>
+    
+<div id="shutdown-overlay" class="shutdown-overlay">
+    <h1 style="color:red; font-size: 3rem;">SIGNAL LOST</h1>
+    <p id="shutdown-timer">TERMINATING SESSION...</p>
+</div>
+
+    <canvas id="matrix-bg"></canvas>
+    
+<header>
+    <div class="window-controls">
+        <div class="dot red" onclick="killSystem()" title="Close Connection"></div>
+        <div class="dot yellow" onclick="minimizeSystem()" title="Minimize"></div>
+        <div class="dot green" onclick="maximizeSystem()" title="Fullscreen"></div>
+    </div>
+    <div class="window-title">root@ukrgeek:~</div>
+    <div class="burger-menu" onclick="toggleMenu()">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+    </div>
+    <nav>
+        <a href="index.html">/HOME</a>
+        <a href="about.html">/IDENTITY</a>
+        <a href="projects.html">/ARSENAL</a>
+        <a href="contact.html">/TERMINAL</a>
+    </nav>
+</header>
+
+    <main class="container"><div id="typewriter-content">
 <h1>SYSTEM INDEX: NAVIGATION & TRUTH</h1>
 <p>Welcome to <strong>UkrGeekLife</strong>. Тут немає води. Тут є факти.</p>
 <div class="alert"><strong>WARNING:</strong> High concentration of sarcasm and logic.</div>
-
 <ul style="list-style-type: none; padding: 0;">
     <li style="margin-bottom: 10px;"><strong>01. Who The Fuck Am I:</strong> Engineer. Patriot. No bullshit allowed.</li>
     <li style="margin-bottom: 10px;"><strong>02. Pure Hate:</strong> 500,000 dead Ukrainians. Why I hate Russia with pure logic.</li>
@@ -24,7 +46,7 @@
     <li style="margin-bottom: 10px;"><strong>11. Security Paranoia:</strong> Ваші паролі — гівно. Вас хакнуть.</li>
     <li style="margin-bottom: 10px;"><strong>12. Old School Tech:</strong> Історія — це єдиний надійний бекап.</li>
     <li style="margin-bottom: 10px;"><strong>13. Machine Learning:</strong> Це не "ШІ", це статистика. Вчіть матчастину.</li>
-    <li style="margin-bottom: 10px;"><strong>14. No Free Work:</strong> Pay me or leave me alone. Charity is over (mostly).</li>
+    <li style="margin-bottom: 10px;"><strong>14. No Free Work:</strong> Pay me or leave me alone. Charity is over.</li>
     <li style="margin-bottom: 10px;"><strong>15. Time Management:</strong> No meetings. Just tickets.</li>
     <li style="margin-bottom: 10px;"><strong>16. Truth Only:</strong> Я не згладжую кути. Truth hurts? Good.</li>
     <li style="margin-bottom: 10px;"><strong>17. Hardware Fetish:</strong> EliteBook reliability > Apple hype.</li>
@@ -33,15 +55,25 @@
     <li style="margin-bottom: 10px;"><strong>20. Survival Guide:</strong> Як жити під час війни і залишатися людиною.</li>
 </ul>
 </div></main>
+    
 <footer>
-    <div>System Online :: &copy; 2025 UkrGeekLife | Andrii Ivas</div>
-    <div class="footer-links">
-        <a href="index.html">/ROOT</a>
-        <a href="about.html">/BIN/WHOAMI</a>
-        <a href="projects.html">/VAR/WWW/ARSENAL</a>
-        <a href="contact.html">/DEV/STDIN</a>
+    <div class="zoo-list" title="My support team">
+        [ SYSTEM RESOURCES: 4 CATS | 2 DOGS | 1 RAT | 1 TURTLE | 100L WATER ]
     </div>
-    <div class="zoo-counter">Running on: 4 Cats, 2 Dogs, 1 Turtle, 1 Rat & 100L Aquarium.</div>
-    <div class="irony">"I automated this footer because manual typing is a bug."</div>
+    <div style="margin: 10px 0;">
+        &copy; 2025 UkrGeekLife | Andrii Ivas | NO FORGIVENESS
+    </div>
+    <div class="ip-trace" id="fake-ip">Trace pending...</div>
+    <div class="irony" style="font-size: 0.6rem; margin-top:10px; opacity: 0.5;">
+        "If you are looking for cookies, I ate them."
+    </div>
     </footer>
-<script src="js/matrix.js"></script><script src='js/typewriter.js'></script></body></html>
+
+    <script src="js/main.js"></script>
+    <script src='js/typewriter.js'></script>
+    <script>
+        window.addEventListener('load', () => {
+            setTimeout(() => { document.getElementById('preloader').classList.add('loaded'); }, 1500);
+        });
+    </script>
+</body></html>
