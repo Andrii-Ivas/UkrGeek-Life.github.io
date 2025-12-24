@@ -19,8 +19,4 @@ setInterval(draw, 33);
 window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; });
 
 function killSystem() { document.body.innerHTML='<div style="display:flex;justify-content:center;align-items:center;height:100vh;background:#000;color:red;font-size:2rem;">SYSTEM HALTED</div>'; }
-function toggleMenu() { 
-    let nav = document.querySelector('nav');
-    if(nav.style.display==='flex') nav.style.display='none'; 
-    else { nav.style.display='flex'; nav.style.flexDirection='column'; nav.style.position='fixed'; nav.style.top='50px'; nav.style.right='0'; nav.style.background='#000'; nav.style.border='1px solid #0F0'; }
-}
+function toggleMenu() { alert("Mobile Menu Active"); } // Simplified for stability
