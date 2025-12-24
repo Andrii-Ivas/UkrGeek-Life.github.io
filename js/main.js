@@ -21,8 +21,29 @@ window.addEventListener('resize', () => { canvas.width = window.innerWidth; canv
 function killSystem() { document.body.innerHTML='<div style="display:flex;justify-content:center;align-items:center;height:100vh;background:#000;color:red;font-size:2rem;">SYSTEM HALTED</div>'; }
 function toggleMenu() { document.querySelector('nav').classList.toggle('active'); }
 
-// TERMINAL LOGIC
+// TERMINAL & TYPEWRITER
 document.addEventListener("DOMContentLoaded", function() {
+    // TYPEWRITER
+    const element = document.getElementById('typewriter-content');
+    if (element) {
+        const text = element.innerHTML;
+        element.innerHTML = "";
+        element.classList.add("cursor");
+        element.style.visibility = "visible";
+        let i = 0;
+        function type() {
+            if (i < text.length) {
+                if (text.charAt(i) === '<') {
+                    let tag = "";
+                    while (text.charAt(i) !== '>' && i < text.length) { tag += text.charAt(i); i++; }
+                    tag += '>'; i++; element.innerHTML += tag;
+                } else { element.innerHTML += text.charAt(i); i++; }
+                setTimeout(type, 1); // Fast typing
+            }
+        }
+        type();
+    }
+    // TERMINAL
     const input = document.getElementById("cmd");
     const history = document.getElementById("history");
     if(input) {
