@@ -4,6 +4,7 @@ import os, sys, subprocess, time, random
 # --- CONFIG ---
 IDENTITY = "UkrGeekLife | Andrii Ivas"
 sys.stdout.reconfigure(encoding='utf-8')
+BUILD_ID = str(time.time()) # FORCE GIT TO SEE CHANGES
 
 LINKS = {
     "YOUTUBE": "https://www.youtube.com/@UkrGeekLife",
@@ -24,7 +25,7 @@ def run(cmd):
         subprocess.run(cmd, shell=True, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         print(f"✅ Executed: {cmd}")
     except:
-        print(f"ℹ️ Git: Ready.")
+        pass # Ignore errors, just push forward
 
 print("--- READING DATA ---")
 try:
@@ -33,7 +34,6 @@ except: BASE_ABOUT = "<h1>ERROR</h1><p>File missing.</p>"
 
 # --- HTML CONTENT ---
 
-# IDENTITY PAGE
 ALIEN_DROPDOWN = """
 <div class="alien-container">
     <div class="alien-core">
@@ -62,7 +62,7 @@ HAL_LINKS = f"""
 """
 ABOUT_CONTENT = ALIEN_DROPDOWN + BASE_ABOUT + HAL_LINKS
 
-# PHOTO GRID (8 ITEMS, 4 COLUMNS)
+# PHOTO GRID (8 WIDGETS, 4 COLUMNS)
 WIDGET_CODE = """
 <div class="widget-box">
     <div class="widget-header">CAM_FEED: INSTAGRAM</div>
@@ -71,7 +71,6 @@ WIDGET_CODE = """
     </div>
 </div>
 """
-# 8 Copies of the widget
 PHOTO_CONTENT = f"""
 <h1>/GALLERY_GRID</h1>
 <p>Visual Database (8 Channels Connected).</p>
@@ -81,12 +80,12 @@ PHOTO_CONTENT = f"""
 </div>
 """
 
-# TERMINAL (FIXED INPUT LAYOUT)
+# TERMINAL (FIXED INPUT)
 CONTACT_CONTENT = """
 <h1>Terminal Access</h1>
 <div class='terminal-window'>
     <div id='history'>
-        <p>UkrGeekLife OS v23.0 (Input Fixed)...</p>
+        <p>UkrGeekLife OS v23.0...</p>
         <p>Type 'help' for commands.</p>
     </div>
     <div class='input-line'>
@@ -96,7 +95,6 @@ CONTACT_CONTENT = """
 </div>
 """
 
-# OTHER PAGES
 INDEX_CONTENT = """<h1>SYSTEM INDEX</h1><ul style="list-style:none;padding:0;"><li><strong>01. Engineer:</strong> Patriot.</li><li><strong>02. Hate:</strong> 500k dead.</li><li><strong>03. Vegetarian:</strong> 10+ years.</li><li><strong>04. Atheist:</strong> Logic only.</li><li><strong>05. Automation:</strong> Scripts.</li><li><strong>06. Python:</strong> Weapon.</li><li><strong>07. Void:</strong> Survivor.</li><li><strong>08. Zoo:</strong> My family.</li><li><strong>09. UX:</strong> Design.</li><li><strong>10. Open Source:</strong> Share.</li></ul>"""
 PROJECTS_CONTENT = """<h1>ARSENAL</h1><ul><li><strong>Growing Box:</strong> Hydroponics.</li><li><strong>Lighting:</strong> Spectrum.</li><li><strong>Global Box:</strong> Architecture.</li></ul><h2>SOCIAL</h2><ul><li><strong>Volunteer Cats:</strong> Helping animals.</li></ul>"""
 VIDEO_CONTENT = f"""<h1>/VIDEO_STREAM</h1><div class="video-wrapper"><iframe id="main-player" width="100%" height="450" src="https://www.youtube.com/embed/{VIDEO_ID}" frameborder="0" allowfullscreen></iframe></div>"""
@@ -118,7 +116,7 @@ header { background: #000; border-bottom: 2px solid #333; padding: 15px 20px; di
 .social-icon { color: #555; font-size: 1.1rem; text-decoration: none; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border: 1px solid #222; background: #000; border-radius: 50%; transition: 0.3s; }
 .social-icon:hover { color: #FFF; border-color: #FFF; box-shadow: 0 0 10px #FFF; }
 
-/* MENU */
+/* MENU POPUP */
 #monolith-menu { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.95); z-index: 2000; display: none; flex-direction: column; align-items: center; justify-content: center; backdrop-filter: blur(5px); opacity: 0; transition: opacity 0.5s; }
 #monolith-menu.active { display: flex; opacity: 1; }
 .hal-9000-eye { width: 80px; height: 80px; background: #300; border-radius: 50%; border: 4px solid #888; box-shadow: 0 0 20px #F00; margin-bottom: 40px; cursor: pointer; transition: 0.3s; }
@@ -134,15 +132,11 @@ header { background: #000; border-bottom: 2px solid #333; padding: 15px 20px; di
 h1, h2 { border-bottom: 1px solid #0F0; color: #FFF; }
 .alert { border: 1px solid #F00; color: #F88; padding: 10px; }
 
-/* --- FIX 1: PHOTO GRID 4 COLUMNS --- */
+/* PHOTO GRID 4 COLS */
 .photo-grid-container { display: grid; gap: 15px; margin-top: 20px; }
-/* Desktop: 4 columns */
 @media (min-width: 1200px) { .photo-grid-container { grid-template-columns: repeat(4, 1fr); } }
-/* Laptop/Tablet Landscape: 2 columns */
 @media (max-width: 1199px) and (min-width: 768px) { .photo-grid-container { grid-template-columns: repeat(2, 1fr); } }
-/* Mobile: 1 column */
 @media (max-width: 767px) { .photo-grid-container { grid-template-columns: 1fr; } }
-
 .widget-box { border: 1px solid #0F0; height: 400px; display: flex; flex-direction: column; background: #000; overflow: hidden; }
 .widget-header { background: #002200; color: #0F0; padding: 5px; font-size: 0.8rem; border-bottom: 1px solid #0F0; flex-shrink: 0; }
 .widget-content { flex: 1; overflow: hidden; position: relative; }
@@ -168,31 +162,11 @@ h1, h2 { border-bottom: 1px solid #0F0; color: #FFF; }
 .hal-btn:hover { border-color: #F00; color: #FFF; background: #000; }
 .hal-btn:hover .hal-eye { background: #F00; border-color: #FFF; box-shadow: 0 0 15px #F00; transform: scale(1.2); }
 
-/* --- FIX 2: TERMINAL INPUT FLEXBOX --- */
+/* TERMINAL INPUT FIX */
 .terminal-window { background: #111; border: 1px solid #0F0; padding: 15px; height: 50vh; overflow-y: auto; font-family: 'Courier New', monospace; font-size: 1rem; text-align: left; }
-.input-line { 
-    display: flex; 
-    align-items: baseline; /* Align text properly */
-    margin-top: 5px; 
-}
-.prompt { 
-    color: #0F0; 
-    margin-right: 10px; 
-    font-weight: bold; 
-    white-space: nowrap; /* Prevent breaking */
-    flex-shrink: 0;
-}
-input#cmd { 
-    background: transparent; 
-    border: none; 
-    color: #FFF; 
-    font-family: 'Courier New', monospace; 
-    font-size: 1rem; 
-    flex-grow: 1; 
-    outline: none; 
-    display: inline-block;
-    padding: 0; margin: 0;
-}
+.input-line { display: flex; align-items: center; margin-top: 5px; }
+.prompt { color: #0F0; margin-right: 10px; font-weight: bold; white-space: nowrap; flex-shrink: 0; }
+input#cmd { background: transparent; border: none; color: #FFF; font-family: 'Courier New', monospace; font-size: 1rem; flex-grow: 1; outline: none; padding: 0; margin: 0; }
 
 /* FOOTER */
 footer { border-top: 1px dashed #0F0; padding: 20px; text-align: center; font-size: 0.8rem; color: #555; margin-top: auto; }
@@ -333,7 +307,7 @@ BASE_HTML = """<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta 
         <a href="{ip}"><i class="fas fa-camera"></i></a>
     </div>
     <div style="margin-top:10px;opacity:0.5;font-size:0.7rem;">© 2025 {id} | NO FORGIVENESS</div>
-</footer>
+    </footer>
 <script src="js/main.js"></script>
 </body></html>"""
 
@@ -351,7 +325,7 @@ pages = {
 
 for fname, content in pages.items():
     html = BASE_HTML.format(
-        title=f"{fname} | {IDENTITY}", content=content, id=IDENTITY,
+        title=f"{fname} | {IDENTITY}", content=content, id=IDENTITY, rnd=BUILD_ID,
         yt=LINKS['YOUTUBE'], im=LINKS['INSTA_MAIN'], fb=LINKS['FACEBOOK'], li=LINKS['LINKEDIN'],
         x=LINKS['X'], tu=LINKS['TUMBLR'], tw=LINKS['TWITCH'], gh=LINKS['GITHUB'], sp=LINKS['SPOTIFY'], ip=LINKS['INSTA_PHOTO']
     )
@@ -361,6 +335,6 @@ for fname, content in pages.items():
 print("--- DEPLOYING ---")
 time.sleep(1)
 run("git add .")
-run(f'git commit -m "UkrGeekLife | Fixed Terminal Input & 4-Col Grid | {time.strftime("%H:%M:%S")}"')
+run(f'git commit -m "UkrGeekLife | FINAL FIX | {time.strftime("%H:%M:%S")}"')
 run("git push origin master")
 print(">>> DONE.")
