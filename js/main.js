@@ -1,5 +1,4 @@
 
-// 1. UA MATRIX
 const canvas = document.getElementById('matrix-bg');
 const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth; canvas.height = window.innerHeight;
@@ -19,39 +18,46 @@ function draw() {
 setInterval(draw, 33);
 window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; });
 
-// 2. BOOT LOADER
 window.addEventListener('load', () => {
     const log = document.getElementById('boot-log');
-    const msgs = ["> INIT_UKR_KERNEL...", "> CHECKING_INTEGRITY...", "> MOUNTING_VOLUMES...", "> ACCESS_GRANTED."];
+    const msgs = ["> INIT_KERNEL...", "> MOUNTING_VOLUMES...", "> SYSTEM_READY."];
     let i = 0;
     const interval = setInterval(() => {
         if(i < msgs.length) { log.innerHTML += msgs[i] + "<br>"; i++; } 
         else { clearInterval(interval); setTimeout(() => { document.getElementById('preloader').classList.add('hidden'); }, 500); }
-    }, 500);
+    }, 600);
 });
 
-// 3. MENU
 function toggleMenu() { 
     const menu = document.getElementById('monolith-menu');
-    if (menu.classList.contains('active')) { menu.classList.remove('active'); setTimeout(() => menu.style.display = 'none', 500); } 
-    else { menu.style.display = 'flex'; setTimeout(() => menu.classList.add('active'), 10); }
+    if (menu.style.display === 'flex') { menu.style.display = 'none'; } 
+    else { menu.style.display = 'flex'; }
 }
+function halSpeak() { alert("I'm sorry, Andrii. I'm afraid I can't do that."); }
 
-// 4. ALIEN TRACKER
+// RADAR TRACKING LOGIC
 document.addEventListener('mousemove', (e) => {
-    const tracker = document.querySelector('.alien-tracker');
-    const blip = document.querySelector('.tracker-blip');
-    if(tracker && blip) {
-        const rect = tracker.getBoundingClientRect();
-        const x = rect.left + rect.width / 2;
-        const y = rect.top + rect.height / 2;
-        const rad = Math.atan2(e.clientX - x, e.clientY - y);
-        const rot = (rad * (180 / Math.PI) * -1) + 180;
-        blip.style.transform = `rotate(${rot}deg)`;
+    const radar = document.querySelector('.radar-display');
+    const dot = document.querySelector('.radar-dot');
+    if(radar && dot) {
+        const rect = radar.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        
+        const dx = e.clientX - centerX;
+        const dy = e.clientY - centerY;
+        const dist = Math.sqrt(dx*dx + dy*dy);
+        
+        const maxDist = (rect.width / 2) - 4; 
+        const scale = dist > maxDist ? maxDist / dist : 1;
+        const finalX = dx * scale;
+        const finalY = dy * scale;
+
+        dot.style.top = `calc(50% + ${finalY}px)`;
+        dot.style.left = `calc(50% + ${finalX}px)`;
     }
 });
 
-// 5. TERMINAL
 document.addEventListener("DOMContentLoaded", function() {
     const input = document.getElementById("cmd");
     const history = document.getElementById("history");
@@ -65,12 +71,12 @@ document.addEventListener("DOMContentLoaded", function() {
                 history.innerHTML += `<div><span class="prompt">root@ukrgeek:~#</span> ${rawCmd}</div>`;
                 let res = "";
                 switch(cmd) {
-                    case "help": res = "COMMANDS: [about] [photo] [video] [blog] [slava]"; break;
+                    case "help": res = "COMMANDS: [about] [photo] [video] [blog] [kill]"; break;
                     case "about": window.location='about.html'; break;
                     case "photo": window.location='photo.html'; break;
                     case "video": window.location='video.html'; break;
                     case "blog": window.location='blog.html'; break;
-                    case "slava": res = "<span style='color:yellow'>GEROYAM SLAVA!</span>"; break;
+                    case "kill": document.body.innerHTML='SYSTEM_HALTED'; break;
                     case "clear": history.innerHTML = ""; break;
                     default: res = `<span style='color:red'>bash: ${rawCmd}: command not found</span>`;
                 }
