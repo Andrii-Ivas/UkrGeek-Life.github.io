@@ -9,7 +9,7 @@ nav a:hover { color: #0F0; text-shadow: 0 0 8px #0F0; }
 h1, h2 { border-bottom: 1px solid #0F0; padding-bottom: 10px; text-transform: uppercase; word-wrap: break-word; }
 p, li { font-size: 1.1rem; line-height: 1.6; }
 .red-alert { color: #FF3333; font-weight: bold; }
-.alert { border: 1px solid #F00; padding: 10px; color: #F00; background: rgba(50,0,0,0.3); margin-bottom: 20px; }
+.alert { border: 1px solid #F00; padding: 10px; color: #F00; background: rgba(50,0,0,0.3); margin: 20px 0; }
 .highlight { color: #FFF; font-weight: bold; }
 footer { border-top: 2px solid #0F0; background: #020202; text-align: center; padding: 20px; margin-top: auto; font-size: 0.9rem; color: #666; }
 .footer-links a { color: #AAA; text-decoration: none; margin: 0 8px; font-weight: bold; }
@@ -18,6 +18,7 @@ footer { border-top: 2px solid #0F0; background: #020202; text-align: center; pa
 .irony { font-style: italic; color: #444; font-size: 0.75rem; margin-top: 5px; }
 .cursor::after { content: '█'; animation: blink 1s infinite; color: #0F0; margin-left: 5px; }
 @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+/* TERMINAL FIXES */
 .terminal-window { background: #111; border: 1px solid #0F0; padding: 15px; height: 50vh; overflow-y: auto; font-family: 'Courier New', monospace; font-size: 1rem; }
 .input-line { display: flex; align-items: center; }
 .prompt { color: #0F0; margin-right: 10px; font-weight: bold; white-space: nowrap; }

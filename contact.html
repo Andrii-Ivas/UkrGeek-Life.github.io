@@ -5,12 +5,13 @@
     <a href="projects.html">[ ARSENAL ]</a>
     <a href="contact.html">[ TERMINAL ]</a>
 </nav>
-</header><main class="container"><div id="typewriter-content"><h1>Terminal Access</h1><div class='terminal-window'><div id='history'><p>UkrGeekLife OS v9.0...</p></div><div class='input-line'><span class='prompt'>guest@ukrgeek:~$</span><input type='text' id='cmd' autofocus autocomplete='off'></div></div></div></main>
+</header><main class="container"><div id="typewriter-content"><h1>Terminal Access</h1><div class='terminal-window'><div id='history'><p>UkrGeekLife OS v10.0 (Arsenal Loaded)...</p></div><div class='input-line'><span class='prompt'>guest@ukrgeek:~$</span><input type='text' id='cmd' autofocus autocomplete='off' enterkeyhint='go'></div></div></div></main>
 <footer>
     <div>System Online :: &copy; 2025 UkrGeekLife | Andrii Ivas</div>
     <div class="footer-links">
         <a href="index.html">/ROOT</a>
         <a href="about.html">/BIN/WHOAMI</a>
+        <a href="projects.html">/VAR/WWW/ARSENAL</a>
         <a href="contact.html">/DEV/STDIN</a>
     </div>
     <div class="zoo-counter">Running on: 4 Cats, 2 Dogs, 1 Turtle, 1 Rat & 100L Aquarium.</div>
@@ -21,29 +22,43 @@
     document.addEventListener("DOMContentLoaded", function() {
         const input = document.getElementById("cmd");
         const history = document.getElementById("history");
+        
         if(input) {
+            // Force focus on load and click
             input.focus();
             document.querySelector('.terminal-window').addEventListener('click', () => input.focus());
+            
             input.addEventListener("keydown", function(e) {
                 if (e.key === "Enter") {
                     const rawCmd = input.value.trim();
                     const cmd = rawCmd.toLowerCase();
+                    
                     history.innerHTML += `<div><span class="prompt">guest@ukrgeek:~$</span> ${rawCmd}</div>`;
+                    
                     let res = "";
                     switch(cmd) {
-                        case "help": res = "Available: [about] [projects] [email] [slava] [clear]"; break;
-                        case "about": res = "See Identity page (/BIN/WHOAMI)."; break;
-                        case "projects": res = "GitHub: ivas-andre. Automation. Security."; break;
-                        case "email": res = "contact@ukrgeek.life"; break;
-                        case "slava": res = "<span style='color:yellow; font-weight:bold;'>GEROYAM SLAVA! 🇺🇦</span>"; break;
-                        case "russia": res = "<span style='color:red; font-weight:bold;'>ERROR 403: TERRORIST STATE DETECTED. BLOCKING.</span>"; break;
-                        case "clear": history.innerHTML = ""; break;
+                        case "help": 
+                            res = "Available: [about] [projects] [email] [slava] [clear]"; break;
+                        case "about": 
+                            res = "See Identity page (/BIN/WHOAMI)."; break;
+                        case "projects": 
+                            res = "See Arsenal page. Open Source & Hardware."; break;
+                        case "email": 
+                            res = "contact@ukrgeek.life"; break;
+                        case "slava": 
+                            res = "<span style='color:yellow; font-weight:bold;'>GEROYAM SLAVA! 🇺🇦</span>"; break;
+                        case "russia": 
+                            res = "<span style='color:red; font-weight:bold;'>ERROR 403: TERRORIST STATE DETECTED. BLOCKING CONNECTION.</span>"; break;
+                        case "clear": 
+                            history.innerHTML = ""; break;
                         case "": res = ""; break;
                         default: res = `<span style='color:red'>Command '${rawCmd}' not found. Try 'help'.</span>`;
                     }
+                    
                     if(cmd !== "clear" && res !== "") {
                         history.innerHTML += `<div style='margin-bottom:10px; color:#DDD; line-height:1.4;'>${res}</div>`;
                     }
+                    
                     input.value = "";
                     const win = document.querySelector('.terminal-window');
                     win.scrollTop = win.scrollHeight;
