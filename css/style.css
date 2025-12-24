@@ -10,14 +10,11 @@ h1, h2 { border-bottom: 1px solid #0F0; padding-bottom: 10px; text-transform: up
 p, li { font-size: 1.1rem; line-height: 1.6; }
 .red-alert { color: #FF3333; font-weight: bold; }
 .highlight { color: #FFF; font-weight: bold; }
-.dim { color: #555; }
 footer { border-top: 2px solid #0F0; background: #020202; text-align: center; padding: 30px; margin-top: auto; font-size: 0.9rem; color: #666; }
 .footer-links a { color: #AAA; text-decoration: none; margin: 0 10px; font-weight: bold; }
 .footer-links a:hover { color: #0F0; text-decoration: underline; }
-/* Typing Cursor */
 .cursor::after { content: '█'; animation: blink 1s infinite; color: #0F0; margin-left: 5px; }
 @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
-/* Terminal Window */
 .terminal-window { background: #111; border: 1px solid #0F0; padding: 20px; height: 60vh; overflow-y: auto; font-family: 'Courier New', monospace; }
 .input-line { display: flex; align-items: center; }
 .prompt { color: #0F0; margin-right: 10px; font-weight: bold; }

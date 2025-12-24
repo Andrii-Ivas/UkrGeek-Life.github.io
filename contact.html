@@ -5,7 +5,7 @@
     <a href="projects.html">[ ARSENAL ]</a>
     <a href="contact.html">[ TERMINAL ]</a>
 </nav>
-</header><main class="container"><div id="typewriter-content"><h1>Terminal Access</h1><div class='terminal-window'><div id='history'><p>UkrGeekLife OS v6.0...</p><p>Type 'help'...</p></div><div class='input-line'><span class='prompt'>guest@ukrgeek:~$</span><input type='text' id='cmd' autofocus></div></div></div></main>
+</header><main class="container"><div id="typewriter-content"><h1>Terminal Access</h1><div class='terminal-window'><div id='history'><p>UkrGeekLife OS v7.0...</p></div><div class='input-line'><span class='prompt'>guest@ukrgeek:~$</span><input type='text' id='cmd' autofocus></div></div></div></main>
 <footer>
     <div>System Online :: &copy; 2025 UkrGeekLife | Andrii Ivas</div>
     <div class="footer-links">
@@ -13,8 +13,8 @@
         <a href="about.html">/BIN/WHOAMI</a>
         <a href="contact.html">/DEV/STDIN</a>
     </div>
-    <div style="margin-top:5px; font-size:0.7rem; color:#444;">Zoo Status: 4 Cats, 2 Dogs, 1 Rat, 1 Turtle. Stable.</div>
-</footer>
+    <div style="margin-top:5px; font-size:0.7rem; color:#444;">Zoo: 4 Cats, 2 Dogs, 1 Rat, 1 Turtle.</div>
+    </footer>
 <script src="js/matrix.js"></script>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
@@ -25,15 +25,13 @@
             document.addEventListener('click', () => input.focus());
             input.addEventListener("keydown", function(e) {
                 if (e.key === "Enter") {
-                    const rawCmd = input.value.trim();
-                    const cmd = rawCmd.toLowerCase();
-                    history.innerHTML += `<div><span class="prompt">guest@ukrgeek:~$</span> ${rawCmd}</div>`;
+                    const cmd = input.value.trim().toLowerCase();
+                    history.innerHTML += `<div><span class="prompt">guest@ukrgeek:~$</span> ${input.value}</div>`;
                     let res = "";
                     switch(cmd) {
-                        case "help": res = "COMMANDS: [about] [projects] [email] [slava] [matrix] [clear]"; break;
-                        case "about": res = "Identity Encrypted... See /BIN/WHOAMI page."; break;
+                        case "help": res = "COMMANDS: [about] [slava] [clear]"; break;
+                        case "about": res = "See Identity page."; break;
                         case "slava": res = "<span style='color:yellow'>GEROYAM SLAVA! 🇺🇦</span>"; break;
-                        case "matrix": res = "Wake up, Andrii..."; break;
                         case "clear": history.innerHTML = ""; break;
                         default: res = "<span style='color:red'>Command not found.</span>";
                     }
