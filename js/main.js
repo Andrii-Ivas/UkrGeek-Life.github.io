@@ -1,8 +1,9 @@
 
+// 1. UA MATRIX
 const canvas = document.getElementById('matrix-bg');
 const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-const chars = 'АБВГҐДЕЄЖЗИІЇЙКЛМНОПРСТУФХЦЧШЩЬЮЯ0123456789'.split('');
+const chars = 'ҐЄЇИІЙЬ'.split('');
 const fontSize = 14; const columns = canvas.width/fontSize;
 const drops = []; for(let x=0; x<columns; x++) drops[x]=1;
 function draw() {
@@ -18,54 +19,40 @@ function draw() {
 setInterval(draw, 33);
 window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; });
 
+// 2. BOOT LOADER
+window.addEventListener('load', () => {
+    const log = document.getElementById('boot-log');
+    const msgs = ["> INIT_UKR_KERNEL...", "> CHECKING_INTEGRITY...", "> MOUNTING_VOLUMES...", "> ACCESS_GRANTED."];
+    let i = 0;
+    const interval = setInterval(() => {
+        if(i < msgs.length) { log.innerHTML += msgs[i] + "<br>"; i++; } 
+        else { clearInterval(interval); setTimeout(() => { document.getElementById('preloader').classList.add('hidden'); }, 500); }
+    }, 500);
+});
+
+// 3. MENU
 function toggleMenu() { 
     const menu = document.getElementById('monolith-menu');
-    if (menu.classList.contains('active')) {
-        menu.classList.remove('active');
-        setTimeout(() => menu.style.display = 'none', 500);
-    } else {
-        menu.style.display = 'flex';
-        setTimeout(() => menu.classList.add('active'), 10);
-    }
+    if (menu.classList.contains('active')) { menu.classList.remove('active'); setTimeout(() => menu.style.display = 'none', 500); } 
+    else { menu.style.display = 'flex'; setTimeout(() => menu.classList.add('active'), 10); }
 }
-function talkHal() { alert("I'm sorry, Dave. I'm afraid I can't do that."); }
 
-// ALIEN TRACKER LOGIC
+// 4. ALIEN TRACKER
 document.addEventListener('mousemove', (e) => {
-    const eye = document.getElementById('alien-eye');
-    if(eye) {
-        const rect = eye.getBoundingClientRect();
+    const tracker = document.querySelector('.alien-tracker');
+    const blip = document.querySelector('.tracker-blip');
+    if(tracker && blip) {
+        const rect = tracker.getBoundingClientRect();
         const x = rect.left + rect.width / 2;
         const y = rect.top + rect.height / 2;
         const rad = Math.atan2(e.clientX - x, e.clientY - y);
         const rot = (rad * (180 / Math.PI) * -1) + 180;
-        eye.style.transform = `rotate(${rot}deg)`;
+        blip.style.transform = `rotate(${rot}deg)`;
     }
 });
 
+// 5. TERMINAL
 document.addEventListener("DOMContentLoaded", function() {
-    // TYPEWRITER
-    const element = document.getElementById('typewriter-content');
-    if (element) {
-        const text = element.innerHTML;
-        element.innerHTML = "";
-        element.classList.add("cursor");
-        element.style.visibility = "visible";
-        let i = 0;
-        function type() {
-            if (i < text.length) {
-                if (text.charAt(i) === '<') {
-                    let tag = "";
-                    while (text.charAt(i) !== '>' && i < text.length) { tag += text.charAt(i); i++; }
-                    tag += '>'; i++; element.innerHTML += tag;
-                } else { element.innerHTML += text.charAt(i); i++; }
-                setTimeout(type, 1);
-            }
-        }
-        type();
-    }
-    
-    // TERMINAL FOCUS
     const input = document.getElementById("cmd");
     const history = document.getElementById("history");
     if(input) {
@@ -85,10 +72,9 @@ document.addEventListener("DOMContentLoaded", function() {
                     case "blog": window.location='blog.html'; break;
                     case "slava": res = "<span style='color:yellow'>GEROYAM SLAVA!</span>"; break;
                     case "clear": history.innerHTML = ""; break;
-                    case "": res = ""; break;
                     default: res = `<span style='color:red'>bash: ${rawCmd}: command not found</span>`;
                 }
-                if(cmd !== "clear" && res !== "") history.innerHTML += `<div style='color:#DDD'>${res}</div>`;
+                if(cmd !== "clear") history.innerHTML += `<div style='color:#DDD'>${res}</div>`;
                 input.value = "";
                 document.querySelector('.terminal-window').scrollTop = document.querySelector('.terminal-window').scrollHeight;
             }
