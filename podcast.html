@@ -1,62 +1,92 @@
-<!DOCTYPE html>
-<html lang="uk">
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>
-   UkrGeek Podcast
-  </title>
-  <script src="https://cdn.tailwindcss.com">
-  </script>
-  <style>
-   :root { --matrix-green: #00ff41; --hal-red: #ff0000; }
-        body { background: #000; color: #fff; font-family: 'Helvetica', sans-serif; }
-        .matrix-text { font-family: 'Courier New', monospace; color: var(--matrix-green); }
-        .glass { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(12px); border: 1px solid rgba(0, 255, 65, 0.2); }
-        .hal-search { border: 2px solid var(--hal-red); box-shadow: 0 0 10px var(--hal-red); }
-  </style>
- </head>
- <body class="min-h-screen flex flex-col">
-  <header class="p-6 glass flex justify-between items-center sticky top-0 z-50">
-   <div class="matrix-text font-bold text-2xl tracking-tighter">
-    UKRGEEKLIFE v0.2.7
-   </div>
-   <nav class="hidden md:flex space-x-8 uppercase text-xs tracking-widest font-bold">
-    <a class="hover:text-green-400" href="index.html">
-     Home
-    </a>
-    <a class="hover:text-green-400" href="about.html">
-     About
-    </a>
-    <a class="hover:text-green-400" href="projects.html">
-     Projects
-    </a>
-    <a class="hover:text-green-400" href="nation.html">
-     Nation
-    </a>
-    <a class="hover:text-green-400" href="podcast.html">
-     Podcast
-    </a>
-    <a class="hover:text-green-400" href="blog.html">
-     Blog
-    </a>
-   </nav>
-   <div class="flex items-center space-x-4">
-    <input class="bg-black border border-red-600 p-1 text-xs text-red-500 focus:outline-none hal-search" placeholder="SEARCH_SYSTEM..." type="text"/>
-   </div>
-  </header>
-  <main class="flex-grow container mx-auto py-16 px-6" id="app_content">
-   <h1>
-    Voice of the Machine
-   </h1>
-   <p>
-    Обговорення технологій та майбутнього.
-   </p>
-  </main>
-  <footer class="p-10 border-t border-gray-900 text-center text-xs matrix-text opacity-40">
-   <p>
-    TERMINAL_ACCESS: GRANTED | NO_RUSSIANS_ALLOWED | SLAVA UKRAINI
-   </p>
-  </footer>
- </body>
-</html>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Audio | UkrGeekLife | Andrii Ivas</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head><body>
+    <div id="preloader"><div style="text-align:center">INITIALIZING PROTOCOL<br><span style="font-size:0.8rem">LOADING MODULES...</span></div></div>
+    
+<div id="shutdown-overlay" class="shutdown-overlay">
+    <h1 style="color:red; font-size: 3rem;">SIGNAL LOST</h1>
+    <p id="shutdown-timer">TERMINATING SESSION...</p>
+</div>
+
+    <canvas id="matrix-bg"></canvas>
+    
+<header>
+    <div class="header-left">
+        <div class="window-controls">
+            <div class="dot red" onclick="killSystem()" title="Close Connection"></div>
+            <div class="dot yellow" onclick="minimizeSystem()" title="Minimize"></div>
+            <div class="dot green" onclick="maximizeSystem()" title="Fullscreen"></div>
+        </div>
+        <div class="window-title">root@ukrgeek:~</div>
+    </div>
+    <div class="header-social">
+        <a href="https://www.youtube.com/@UkrGeekLife" target="_blank" class="social-icon" title="YouTube"><i class="fab fa-youtube"></i></a>
+        <a href="https://www.instagram.com/ivas_andrii/" target="_blank" class="social-icon" title="Instagram (Main)"><i class="fab fa-instagram"></i></a>
+        <a href="#" target="_blank" class="social-icon" title="Facebook"><i class="fab fa-facebook"></i></a>
+        <a href="https://www.linkedin.com/in/ivas-andre/" target="_blank" class="social-icon" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+    </div>
+    <div style="display:flex; align-items:center;">
+        <nav>
+            <a href="index.html">/HOME</a>
+            <a href="about.html">/IDENTITY</a>
+            <a href="projects.html">/ARSENAL</a>
+            <a href="video.html">/VIDEO</a>
+            <a href="blog.html">/BLOG</a>
+            <a href="podcast.html">/PODCAST</a>
+            <a href="contact.html">/TERMINAL</a>
+        </nav>
+        <div class="burger-menu" onclick="toggleMenu()">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
+    </div>
+</header>
+
+    <main class="container"><div id="typewriter-content">
+<h1>/DEV/AUDIO/OUTPUT</h1>
+<p>Voice logs. Rants. Unfiltered audio streams.</p>
+<div class="audio-list">
+    <div class="audio-item">
+        <button class="play-btn">▶ PLAY</button>
+        <span class="track-name">EP_01: WHY_PYTHON_IS_KING.mp3</span>
+        <span class="track-time">[12:04]</span>
+    </div>
+    <div class="audio-item">
+        <button class="play-btn">▶ PLAY</button>
+        <span class="track-name">EP_02: HATING_RUSSIANS_AS_A_SERVICE.mp3</span>
+        <span class="track-time">[45:00]</span>
+    </div>
+</div>
+<div class="alert">Audio modules currently offline. Connecting to server...</div>
+</div></main>
+    
+<footer>
+    <div class="zoo-list" title="My support team">
+        [ SYSTEM RESOURCES: 4 CATS | 2 DOGS | 1 RAT | 1 TURTLE | 100L WATER ]
+    </div>
+    <div class="footer-bottom" style="margin: 15px 0;">
+        <a href="https://x.com/Andrii_Ivas" target="_blank" class="footer-icon-link" title="X"><i class="fab fa-twitter"></i></a>
+        <a href="https://www.tumblr.com/andre-ivas" target="_blank" class="footer-icon-link" title="Tumblr"><i class="fab fa-tumblr"></i></a>
+        <a href="https://www.twitch.tv/ivas_andre" target="_blank" class="footer-icon-link" title="Twitch"><i class="fab fa-twitch"></i></a>
+        <a href="https://github.com/ivas-andre" target="_blank" class="footer-icon-link" title="GitHub"><i class="fab fa-github"></i></a>
+        <a href="https://www.instagram.com/andrii_photographer/" target="_blank" class="footer-icon-link" title="Photo Instagram"><i class="fas fa-camera"></i></a>
+        <a href="https://open.spotify.com/user/0" target="_blank" class="footer-icon-link" title="Spotify"><i class="fab fa-spotify"></i></a>
+    </div>
+    <div class="footer-bottom">
+        <span class="ip-trace" id="fake-ip">Trace...</span>
+        <span>::</span>
+        <span class="uptime" id="uptime-counter">UPTIME: 0s</span>
+    </div>
+    <div style="margin-top: 15px; opacity: 0.5; font-size: 0.7rem;">© 2025 UkrGeekLife | Andrii Ivas | NO FORGIVENESS</div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src='js/typewriter.js'></script>
+    <script>
+        window.addEventListener('load', () => {
+            setTimeout(() => { document.getElementById('preloader').classList.add('loaded'); }, 1500);
+        });
+    </script>
+</body></html>

@@ -1,5 +1,4 @@
 
-// 1. MATRIX BACKGROUND (UA)
 const canvas = document.getElementById('matrix-bg');
 const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
@@ -24,7 +23,6 @@ function draw() {
 setInterval(draw, 33);
 window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; });
 
-// 2. KILL SWITCH
 function killSystem() {
     const overlay = document.getElementById('shutdown-overlay');
     overlay.style.display = 'flex';
@@ -50,25 +48,19 @@ function maximizeSystem() {
     if (!document.fullscreenElement) { document.documentElement.requestFullscreen(); } 
     else { if (document.exitFullscreen) { document.exitFullscreen(); } }
 }
-
-// 3. BURGER MENU
 function toggleMenu() {
     const nav = document.querySelector('nav');
     const burger = document.querySelector('.burger-menu');
     nav.classList.toggle('active');
     burger.classList.toggle('active');
 }
-
-// 4. VIDEO SWITCHER
 function changeVideo(id) {
     const player = document.getElementById('main-player');
-    if(player) {
-        player.src = "https://www.youtube.com/embed/" + id + "?autoplay=1";
-    }
+    if(player) { player.src = "https://www.youtube.com/embed/" + id + "?autoplay=1"; }
 }
-
-// 5. FOOTER LOGIC
 document.addEventListener("DOMContentLoaded", function() {
     const ips = ["192.168.0.1 (Local)", "10.0.0.13 (Proxy)", "Trace Failed...", "SBU_Node_7"];
     document.getElementById('fake-ip').innerText = "Route: " + ips[Math.floor(Math.random() * ips.length)];
+    let seconds = 0;
+    setInterval(() => { seconds++; document.getElementById('uptime-counter').innerText = "UPTIME: " + seconds + "s"; }, 1000);
 });
