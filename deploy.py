@@ -3,29 +3,35 @@ import os
 import sys
 import subprocess
 import time
-import random
 
 # --- CONFIGURATION ---
 IDENTITY = "UkrGeekLife | Andrii Ivas"
-# FORCE UTF-8 OUTPUT
 sys.stdout.reconfigure(encoding='utf-8')
 
-# SOCIAL LINKS DATABASE
+# SOCIAL LINKS DATABASE (UPDATED)
 LINKS = {
     "YOUTUBE": "https://www.youtube.com/@UkrGeekLife",
     "INSTA_MAIN": "https://www.instagram.com/ivas_andrii/",
     "INSTA_PHOTO": "https://www.instagram.com/andrii_photographer/",
-    "FACEBOOK": "#", 
+    "FACEBOOK": "https://www.facebook.com/Andrii.Ivas/", 
     "LINKEDIN": "https://www.linkedin.com/in/ivas-andre/", 
     "X": "https://x.com/Andrii_Ivas",
     "TUMBLR": "https://www.tumblr.com/andre-ivas",
     "TWITCH": "https://www.twitch.tv/ivas_andre",
     "GITHUB": "https://github.com/ivas-andre",
-    "SPOTIFY": "https://open.spotify.com/user/0" 
+    "SPOTIFY": "https://open.spotify.com/playlist/1BG0k1dDJN14PczoyvSD6T?si=JVz8SvIGQHeba0XCCsulzQ"
 }
 
 # VIDEO ID
 CURRENT_VIDEO_ID = "-h7ygd0mp7c"
+
+# SPOTIFY EMBED CODE (EXACTLY AS PROVIDED)
+SPOTIFY_EMBED_HTML = """
+<div style="margin-top: 30px; border-top: 1px dashed #0F0; padding-top: 20px;">
+    <h3 style="color: #0F0; margin-bottom: 10px;">> /MEDIA/AUDIO_VIBE</h3>
+    <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/1BG0k1dDJN14PczoyvSD6T?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+</div>
+"""
 
 def run(cmd):
     try:
@@ -41,10 +47,11 @@ def run(cmd):
 print("--- READING about_me.txt ---")
 try:
     with open("about_me.txt", "r", encoding="utf-8") as f:
-        ABOUT_CONTENT = f.read()
+        # Read text and append Spotify Player
+        ABOUT_CONTENT = f.read() + SPOTIFY_EMBED_HTML
 except FileNotFoundError:
     print("❌ ERROR: about_me.txt missing. Using backup.")
-    ABOUT_CONTENT = "<h1>ERROR</h1><p>File missing.</p>"
+    ABOUT_CONTENT = "<h1>ERROR</h1><p>File missing.</p>" + SPOTIFY_EMBED_HTML
 
 # 2. CONTENT DEFINITIONS
 
