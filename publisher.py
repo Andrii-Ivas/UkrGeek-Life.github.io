@@ -1,67 +1,62 @@
 # -*- coding: utf-8 -*-
 import os
 import sys
+import subprocess
+import time
+import webbrowser
+from http.server import HTTPServer, SimpleHTTPRequestHandler
+import threading
 
-# 1. SETUP
-sys.stdout.reconfigure(encoding='utf-8')
+# --- CONFIGURATION ---
 IDENTITY = "UkrGeekLife | Andrii Ivas"
-os.makedirs("css", exist_ok=True)
-os.makedirs("js", exist_ok=True)
+PORT = 8000
 
-# 2. ASSETS
+# Force UTF-8 for Console
+sys.stdout.reconfigure(encoding='utf-8')
 
-# --- CSS ---
+def run_command(command):
+    """Executes shell commands purely via Python"""
+    try:
+        result = subprocess.run(command, shell=True, check=True, text=True, capture_output=True)
+        print(f"✅ Executed: {command}")
+        return result.stdout
+    except subprocess.CalledProcessError as e:
+        print(f"❌ Error: {e.stderr}")
+        return None
+
+# --- ASSETS GENERATION ---
+
 CSS_CODE = """
 body { background-color: #000; color: #0F0; font-family: 'Courier New', monospace; margin: 0; padding: 0; min-height: 100vh; display: flex; flex-direction: column; }
 #matrix-bg { position: fixed; top: 0; left: 0; z-index: -1; opacity: 0.15; }
-
-/* HEADER (English UI) */
 header { background: rgba(0, 20, 0, 0.95); border-bottom: 2px solid #0F0; padding: 15px 0; text-align: center; position: sticky; top: 0; z-index: 100; }
 .logo { font-size: 1.5rem; font-weight: bold; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 10px; text-shadow: 0 0 10px #0F0; }
 nav a { color: #FFF; text-decoration: none; margin: 0 15px; font-size: 1.1rem; font-weight: bold; transition: 0.3s; }
 nav a:hover { color: #0F0; text-shadow: 0 0 8px #0F0; }
-
-/* CONTAINER */
 .container { flex: 1; max-width: 900px; margin: 40px auto; padding: 20px; background: rgba(0, 0, 0, 0.8); border: 1px solid #333; width: 90%; }
 h1, h2 { border-bottom: 1px solid #0F0; padding-bottom: 10px; text-transform: uppercase; }
 p, li { font-size: 1.1rem; line-height: 1.6; }
 .alert { color: #FF3333; font-weight: bold; border: 1px solid #F00; padding: 10px; margin: 10px 0; background: rgba(50, 0, 0, 0.5); }
 .highlight { color: #FFF; font-weight: bold; }
 .red-alert { color: #FF3333; font-weight: bold; }
-
-/* FOOTER (The Brilliant Part) */
-footer { 
-    border-top: 2px solid #0F0; 
-    background: #020202; 
-    text-align: center; 
-    padding: 30px; 
-    margin-top: auto; 
-    font-size: 0.9rem; 
-    color: #666; 
-}
+footer { border-top: 2px solid #0F0; background: #020202; text-align: center; padding: 30px; margin-top: auto; font-size: 0.9rem; color: #666; }
 .footer-row { margin-bottom: 10px; }
 .footer-links a { color: #AAA; text-decoration: none; margin: 0 10px; font-weight: bold; }
 .footer-links a:hover { color: #0F0; text-decoration: underline; }
 .irony { font-style: italic; color: #444; font-size: 0.8rem; }
 .zoo-counter { color: #004400; font-size: 0.8rem; letter-spacing: 1px; }
-
-/* EASTER EGG */
 .hazard-zone { cursor: help; transition: 0.3s; }
 .hazard-zone:hover { color: #F00; text-shadow: 2px 2px 0px #FFF; content: "RM -RF /"; }
-
-/* Typing Cursor */
 .cursor::after { content: '█'; animation: blink 1s infinite; color: #0F0; margin-left: 5px; }
 @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
-
-/* Terminal Specifics */
-.terminal-window { background: #111; border: 1px solid #0F0; padding: 20px; height: 60vh; overflow-y: auto; }
+/* Terminal specific */
+.terminal-window { background: #111; border: 1px solid #0F0; padding: 20px; height: 60vh; overflow-y: auto; font-family: 'Courier New', monospace; }
 .input-line { display: flex; align-items: center; }
 .prompt { color: #0F0; margin-right: 10px; font-weight: bold; }
-input#cmd { background: transparent; border: none; color: #FFF; font-family: monospace; font-size: 1.2rem; flex-grow: 1; outline: none; }
+input#cmd { background: transparent; border: none; color: #FFF; font-family: 'Courier New', monospace; font-size: 1.2rem; flex-grow: 1; outline: none; }
 #typewriter-content { visibility: hidden; }
 """
 
-# --- JS: MATRIX ---
 JS_MATRIX = """
 const canvas = document.getElementById('matrix-bg');
 const ctx = canvas.getContext('2d');
@@ -88,7 +83,6 @@ setInterval(draw, 33);
 window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; });
 """
 
-# --- JS: TYPEWRITER ---
 JS_TYPEWRITER = """
 document.addEventListener("DOMContentLoaded", function() {
     const element = document.getElementById('typewriter-content');
@@ -113,64 +107,7 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 """
 
-# --- JS: TERMINAL (SEPARATED FILE) ---
-JS_TERMINAL = """
-document.addEventListener("DOMContentLoaded", function() {
-    const input = document.getElementById("cmd");
-    const history = document.getElementById("history");
-    
-    if(input) {
-        // Auto-focus on load
-        input.focus();
-        
-        // Always refocus when clicking anywhere
-        document.addEventListener('click', () => input.focus());
-
-        input.addEventListener("keydown", function(e) {
-            if (e.key === "Enter") {
-                const cmd = input.value.trim().toLowerCase();
-                
-                // Echo command
-                history.innerHTML += `<div><span class="prompt">guest@ukrgeek:~$</span> ${input.value}</div>`;
-                
-                let res = "";
-                switch(cmd) {
-                    case "help": 
-                        res = "COMMANDS: [about] [projects] [email] [slava] [clear]"; 
-                        break;
-                    case "about": 
-                        res = "Andrii Ivas. Vegetarian. Patriot. Automation Architect."; 
-                        break;
-                    case "projects": 
-                        res = "GitHub: ivas-andre. Automation. Security."; 
-                        break;
-                    case "email":
-                        res = "Email: contact@ukrgeek.life";
-                        break;
-                    case "slava": 
-                        res = "<span style='color:yellow'>GEROYAM SLAVA! 🇺🇦</span>"; 
-                        break;
-                    case "clear": 
-                        history.innerHTML = ""; 
-                        break;
-                    default: 
-                        res = "<span style='color:red'>Error: Command not found. Try 'help'.</span>";
-                }
-                
-                if(cmd !== "clear") {
-                    history.innerHTML += `<div style='margin-bottom:10px; color:#DDD'>${res}</div>`;
-                }
-                
-                input.value = "";
-                // Auto-scroll to bottom
-                document.querySelector('.terminal-window').scrollTop = document.querySelector('.terminal-window').scrollHeight;
-            }
-        });
-    }
-});
-"""
-
-# 3. TEMPLATES (ENGLISH UI)
+# --- HTML TEMPLATES ---
 
 NAV_MENU = """
 <nav role="navigation">
@@ -181,27 +118,64 @@ NAV_MENU = """
 </nav>
 """
 
-FOOTER_TEMPLATE = """
+FOOTER = f"""
 <footer>
-    <div class="footer-row">
-        <span class="hazard-zone" title="System Kernel: Stable">System Online</span> :: &copy; 2025 {logo}
-    </div>
-    
-    <div class="footer-row footer-links">
+    <div class="footer-row"><span class="hazard-zone" title="System Kernel: Stable">System Online</span> :: &copy; 2025 {IDENTITY}</div>
+    <div class="footer-links">
         <a href="index.html">/ROOT</a>
         <a href="about.html">/BIN/WHOAMI</a>
         <a href="projects.html">/VAR/WWW/PROJECTS</a>
         <a href="contact.html">/DEV/STDIN</a>
     </div>
-
-    <div class="footer-row zoo-counter">
-        Running on: 4 Cats, 2 Dogs, 1 Turtle, 1 Rat & 100L of Water.
-    </div>
-
-    <div class="irony">
-        "I automated this footer because I was too lazy to type it twice."
-    </div>
+    <div class="footer-row zoo-counter">Running on: 4 Cats, 2 Dogs, 1 Turtle, 1 Rat & 100L of Water.</div>
+    <div class="irony">"I automated this footer because I was too lazy to type it twice."</div>
 </footer>
+"""
+
+# IMPORTANT: Using {{ and }} to escape braces for Python f-string logic in JS
+TERMINAL_SCRIPT_INLINE = """
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const input = document.getElementById("cmd");
+        const history = document.getElementById("history");
+        
+        // Auto-focus logic
+        if(input) {
+            input.focus();
+            document.addEventListener('click', () => input.focus());
+
+            input.addEventListener("keydown", function(e) {
+                if (e.key === "Enter") {
+                    const rawCmd = input.value.trim();
+                    const cmd = rawCmd.toLowerCase();
+                    
+                    history.innerHTML += `<div><span class="prompt">guest@ukrgeek:~$</span> ${rawCmd}</div>`;
+                    
+                    let res = "";
+                    switch(cmd) {
+                        case "help": res = "COMMANDS: [about] [projects] [email] [slava] [clear]"; break;
+                        case "about": res = "Andrii Ivas. Vegetarian. Patriot. Automation Architect."; break;
+                        case "projects": res = "GitHub: ivas-andre. Automation. Security. Python/PowerShell."; break;
+                        case "email": res = "Email: contact@ukrgeek.life"; break;
+                        case "slava": res = "<span style='color:yellow; font-weight:bold; font-size:1.2em;'>GEROYAM SLAVA! 🇺🇦</span>"; break;
+                        case "russia": res = "<span style='color:red; font-weight:bold;'>ERROR 403: TERRORIST STATE FOUND. BLOCKING CONNECTION.</span>"; break;
+                        case "clear": history.innerHTML = ""; break;
+                        case "": res = ""; break;
+                        default: res = `<span style='color:red'>Command '${rawCmd}' not found. Try 'help'.</span>`;
+                    }
+                    
+                    if(cmd !== "clear" && res !== "") {
+                        history.innerHTML += `<div style='margin-bottom:10px; color:#DDD; line-height:1.4;'>${res}</div>`;
+                    }
+                    
+                    input.value = "";
+                    const terminalWindow = document.querySelector('.terminal-window');
+                    terminalWindow.scrollTop = terminalWindow.scrollHeight;
+                }
+            });
+        }
+    });
+</script>
 """
 
 BASE_HTML = """<!DOCTYPE html>
@@ -226,7 +200,8 @@ BASE_HTML = """<!DOCTYPE html>
 </body>
 </html>"""
 
-# 4. CONTENT (MIXED LANGUAGE BODY)
+# --- CONTENT DEFINITION ---
+
 ABOUT_CONTENT = """
 <h1>The Protocol: No Gods, No Masters, No Forgiveness</h1>
 <p>Let’s be crystal clear. Я не буду підбирати слова, щоб комусь було "комфортно". Comfort is a lie. Реальність — це датасет, і він часто буває потворним.</p>
@@ -268,32 +243,28 @@ I looked around and realized: God doesn't exist. Religion is a control system fo
 """
 
 PAGES = {
-    "index.html": { 
-        "title": f"Home | {IDENTITY}", 
-        "content": "<h1>System Online</h1><p>Welcome to the digital space of Andrii Ivas.</p><p>All systems nominal.</p>", 
-        "js": "",
-        "extra_js_file": "" 
+    "index.html": {
+        "title": f"Home | {IDENTITY}",
+        "content": "<h1>System Online</h1><p>Welcome to the digital space of Andrii Ivas.</p><p>All systems nominal.</p>",
+        "js": ""
     },
-    "about.html": { 
-        "title": f"Identity | {IDENTITY}", 
-        "content": ABOUT_CONTENT, 
-        "js": "",
-        "extra_js_file": "<script src='js/typewriter.js'></script>" # TYPEWRITER ONLY HERE
+    "about.html": {
+        "title": f"Identity | {IDENTITY}",
+        "content": ABOUT_CONTENT,
+        "js": "<script src='js/typewriter.js'></script>"
     },
-    "projects.html": { 
-        "title": f"Arsenal | {IDENTITY}", 
-        "content": "<h1>Arsenal</h1><ul><li><strong>Full Automation Deploy:</strong> No manual bullshit.</li><li><strong>Security Audit:</strong> Protecting the code.</li></ul>", 
-        "js": "",
-        "extra_js_file": "" 
+    "projects.html": {
+        "title": f"Arsenal | {IDENTITY}",
+        "content": "<h1>Arsenal</h1><ul><li><strong>Full Automation Deploy:</strong> No manual bullshit.</li><li><strong>Security Audit:</strong> Protecting the code.</li></ul>",
+        "js": ""
     },
-    # FIXED: CONTACT PAGE NOW LINKS TO EXTERNAL FILE
-    "contact.html": { 
-        "title": f"Terminal | {IDENTITY}", 
+    "contact.html": {
+        "title": f"Terminal | {IDENTITY}",
         "content": """
         <h1>Terminal Access</h1>
         <div class='terminal-window'>
             <div id='history'>
-                <p>UkrGeekLife OS v4.1 initialized...</p>
+                <p>UkrGeekLife OS v5.0 (Pure Python Edition)...</p>
                 <p>Type 'help' to verify privileges...</p>
             </div>
             <div class='input-line'>
@@ -301,36 +272,58 @@ PAGES = {
                 <input type='text' id='cmd' autofocus autocomplete="off">
             </div>
         </div>
-        """, 
-        "js": "",
-        "extra_js_file": "<script src='js/terminal.js'></script>" # LINK TO FILE, NOT INJECTION
+        """,
+        "js": TERMINAL_SCRIPT_INLINE
     }
 }
 
-# 5. GENERATE
-def generate():
-    print("--- WRITING SYSTEM FILES ---")
+# --- MAIN EXECUTION ---
+
+def build_site():
+    print("--- 1. BUILDING ASSETS ---")
+    os.makedirs("css", exist_ok=True)
+    os.makedirs("js", exist_ok=True)
     
-    # Write CSS & JS assets to separate files
     with open("css/style.css", "w", encoding="utf-8") as f: f.write(CSS_CODE)
     with open("js/matrix.js", "w", encoding="utf-8") as f: f.write(JS_MATRIX)
     with open("js/typewriter.js", "w", encoding="utf-8") as f: f.write(JS_TYPEWRITER)
-    with open("js/terminal.js", "w", encoding="utf-8") as f: f.write(JS_TERMINAL)
-    
-    print("✅ Assets Written (CSS, Matrix, Typewriter, Terminal)")
+    print("✅ Assets written.")
 
-    print("--- GENERATING PAGES ---")
+    print("--- 2. GENERATING HTML ---")
     for filename, data in PAGES.items():
-        final_html = BASE_HTML.format(
-            title=data['title'], 
-            logo=IDENTITY, 
-            nav=NAV_MENU, 
-            content=data['content'], 
-            footer=FOOTER_TEMPLATE.format(logo=IDENTITY), 
-            extra_js=data['extra_js_file']
+        html = BASE_HTML.format(
+            title=data['title'],
+            logo=IDENTITY,
+            nav=NAV_MENU,
+            content=data['content'],
+            footer=FOOTER,
+            extra_js=data['js']
         )
-        with open(filename, "w", encoding="utf-8") as f: f.write(final_html)
-        print(f"✅ {filename} Generated")
+        with open(filename, "w", encoding="utf-8") as f: f.write(html)
+        print(f"✅ {filename} generated.")
+
+def git_deploy():
+    print("--- 3. GIT DEPLOYMENT ---")
+    run_command("git add .")
+    run_command(f'git commit -m "UkrGeekLife | Pure Python Deploy | {time.strftime("%H:%M")}"')
+    run_command("git push origin master")
+
+def start_server():
+    print(f"--- 4. STARTING SERVER (PORT {PORT}) ---")
+    print(">>> Press Ctrl+C to stop.")
+    
+    # Open browser
+    webbrowser.open(f"http://localhost:{PORT}/about.html")
+    
+    # Start Server
+    handler = SimpleHTTPRequestHandler
+    with HTTPServer(("", PORT), handler) as httpd:
+        try:
+            httpd.serve_forever()
+        except KeyboardInterrupt:
+            print("\n🛑 Server stopped.")
 
 if __name__ == "__main__":
-    generate()
+    build_site()
+    git_deploy()
+    start_server()

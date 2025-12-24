@@ -22,7 +22,7 @@
         <h1>Terminal Access</h1>
         <div class='terminal-window'>
             <div id='history'>
-                <p>UkrGeekLife OS v4.1 initialized...</p>
+                <p>UkrGeekLife OS v5.0 (Pure Python Edition)...</p>
                 <p>Type 'help' to verify privileges...</p>
             </div>
             <div class='input-line'>
@@ -35,27 +35,61 @@
     </main>
     
 <footer>
-    <div class="footer-row">
-        <span class="hazard-zone" title="System Kernel: Stable">System Online</span> :: &copy; 2025 UkrGeekLife | Andrii Ivas
-    </div>
-    
-    <div class="footer-row footer-links">
+    <div class="footer-row"><span class="hazard-zone" title="System Kernel: Stable">System Online</span> :: &copy; 2025 UkrGeekLife | Andrii Ivas</div>
+    <div class="footer-links">
         <a href="index.html">/ROOT</a>
         <a href="about.html">/BIN/WHOAMI</a>
         <a href="projects.html">/VAR/WWW/PROJECTS</a>
         <a href="contact.html">/DEV/STDIN</a>
     </div>
-
-    <div class="footer-row zoo-counter">
-        Running on: 4 Cats, 2 Dogs, 1 Turtle, 1 Rat & 100L of Water.
-    </div>
-
-    <div class="irony">
-        "I automated this footer because I was too lazy to type it twice."
-    </div>
+    <div class="footer-row zoo-counter">Running on: 4 Cats, 2 Dogs, 1 Turtle, 1 Rat & 100L of Water.</div>
+    <div class="irony">"I automated this footer because I was too lazy to type it twice."</div>
 </footer>
 
     <script src="js/matrix.js"></script>
-    <script src='js/terminal.js'></script>
+    
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const input = document.getElementById("cmd");
+        const history = document.getElementById("history");
+        
+        // Auto-focus logic
+        if(input) {
+            input.focus();
+            document.addEventListener('click', () => input.focus());
+
+            input.addEventListener("keydown", function(e) {
+                if (e.key === "Enter") {
+                    const rawCmd = input.value.trim();
+                    const cmd = rawCmd.toLowerCase();
+                    
+                    history.innerHTML += `<div><span class="prompt">guest@ukrgeek:~$</span> ${rawCmd}</div>`;
+                    
+                    let res = "";
+                    switch(cmd) {
+                        case "help": res = "COMMANDS: [about] [projects] [email] [slava] [clear]"; break;
+                        case "about": res = "Andrii Ivas. Vegetarian. Patriot. Automation Architect."; break;
+                        case "projects": res = "GitHub: ivas-andre. Automation. Security. Python/PowerShell."; break;
+                        case "email": res = "Email: contact@ukrgeek.life"; break;
+                        case "slava": res = "<span style='color:yellow; font-weight:bold; font-size:1.2em;'>GEROYAM SLAVA! 🇺🇦</span>"; break;
+                        case "russia": res = "<span style='color:red; font-weight:bold;'>ERROR 403: TERRORIST STATE FOUND. BLOCKING CONNECTION.</span>"; break;
+                        case "clear": history.innerHTML = ""; break;
+                        case "": res = ""; break;
+                        default: res = `<span style='color:red'>Command '${rawCmd}' not found. Try 'help'.</span>`;
+                    }
+                    
+                    if(cmd !== "clear" && res !== "") {
+                        history.innerHTML += `<div style='margin-bottom:10px; color:#DDD; line-height:1.4;'>${res}</div>`;
+                    }
+                    
+                    input.value = "";
+                    const terminalWindow = document.querySelector('.terminal-window');
+                    terminalWindow.scrollTop = terminalWindow.scrollHeight;
+                }
+            });
+        }
+    });
+</script>
+
 </body>
 </html>
