@@ -33,7 +33,7 @@ except: BASE_ABOUT = "<h1>ERROR</h1><p>File missing.</p>"
 
 # --- HTML CONTENT ---
 
-# IDENTITY PAGE (ALIEN DROPDOWN + HAL LINKS)
+# IDENTITY PAGE
 ALIEN_DROPDOWN = """
 <div class="alien-container">
     <div class="alien-core">
@@ -62,7 +62,7 @@ HAL_LINKS = f"""
 """
 ABOUT_CONTENT = ALIEN_DROPDOWN + BASE_ABOUT + HAL_LINKS
 
-# PHOTO GRID (REPLICATED WIDGETS AS REQUESTED)
+# PHOTO GRID (8 ITEMS, 4 COLUMNS)
 WIDGET_CODE = """
 <div class="widget-box">
     <div class="widget-header">CAM_FEED: INSTAGRAM</div>
@@ -71,26 +71,22 @@ WIDGET_CODE = """
     </div>
 </div>
 """
-# Creating 6 slots of the same widget to fill the grid
+# 8 Copies of the widget
 PHOTO_CONTENT = f"""
 <h1>/GALLERY_GRID</h1>
-<p>Visual Database. Multiple streams connected.</p>
+<p>Visual Database (8 Channels Connected).</p>
 <div class="photo-grid-container">
-    {WIDGET_CODE}
-    {WIDGET_CODE}
-    {WIDGET_CODE}
-    {WIDGET_CODE}
-    {WIDGET_CODE}
-    {WIDGET_CODE}
+    {WIDGET_CODE}{WIDGET_CODE}{WIDGET_CODE}{WIDGET_CODE}
+    {WIDGET_CODE}{WIDGET_CODE}{WIDGET_CODE}{WIDGET_CODE}
 </div>
 """
 
-# TERMINAL (FIXED INPUT)
+# TERMINAL (FIXED INPUT LAYOUT)
 CONTACT_CONTENT = """
 <h1>Terminal Access</h1>
 <div class='terminal-window'>
     <div id='history'>
-        <p>UkrGeekLife OS v22.0 (Terminal Fix)...</p>
+        <p>UkrGeekLife OS v23.0 (Input Fixed)...</p>
         <p>Type 'help' for commands.</p>
     </div>
     <div class='input-line'>
@@ -112,53 +108,20 @@ CSS_CODE = """
 body { background-color: #050505; color: #0F0; font-family: 'Courier New', monospace; margin: 0; padding: 0; min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; }
 #matrix-bg { position: fixed; top: 0; left: 0; z-index: -1; opacity: 0.15; }
 
-/* HEADER - CLEAN & SPACEY */
-header { 
-    background: #000; border-bottom: 2px solid #333; 
-    padding: 15px 20px; 
-    display: flex; justify-content: space-between; align-items: center; 
-    position: sticky; top: 0; z-index: 1000;
-}
-
-/* IDENTITY TRIGGER */
-.identity-trigger { 
-    font-size: 1.1rem; font-weight: bold; color: #FFF; 
-    cursor: pointer; letter-spacing: 2px; text-transform: uppercase;
-    border: 1px solid transparent; padding: 5px 10px; transition: 0.3s;
-    display: flex; align-items: center; gap: 10px;
-}
-.identity-trigger:hover { 
-    color: #F00; border-color: #F00; text-shadow: 0 0 10px #F00; 
-    background: rgba(20, 0, 0, 0.8);
-}
-.hal-mini-eye {
-    width: 15px; height: 15px; background: #500; border-radius: 50%; 
-    box-shadow: 0 0 5px #F00; transition: 0.3s;
-}
+/* HEADER */
+header { background: #000; border-bottom: 2px solid #333; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; }
+.identity-trigger { font-size: 1.1rem; font-weight: bold; color: #FFF; cursor: pointer; letter-spacing: 2px; text-transform: uppercase; border: 1px solid transparent; padding: 5px 10px; transition: 0.3s; display: flex; align-items: center; gap: 10px; }
+.identity-trigger:hover { color: #F00; border-color: #F00; text-shadow: 0 0 10px #F00; background: rgba(20, 0, 0, 0.8); }
+.hal-mini-eye { width: 15px; height: 15px; background: #500; border-radius: 50%; box-shadow: 0 0 5px #F00; transition: 0.3s; }
 .identity-trigger:hover .hal-mini-eye { background: #F00; box-shadow: 0 0 15px #F00; }
-
-/* SOCIAL ICONS */
 .header-social { display: flex; gap: 10px; }
-.social-icon { 
-    color: #555; font-size: 1.1rem; text-decoration: none; 
-    width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; 
-    border: 1px solid #222; background: #000; border-radius: 50%; transition: 0.3s;
-}
+.social-icon { color: #555; font-size: 1.1rem; text-decoration: none; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border: 1px solid #222; background: #000; border-radius: 50%; transition: 0.3s; }
 .social-icon:hover { color: #FFF; border-color: #FFF; box-shadow: 0 0 10px #FFF; }
 
-/* SPACE MENU */
-#monolith-menu {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.95); z-index: 2000;
-    display: none; flex-direction: column; align-items: center; justify-content: center;
-    backdrop-filter: blur(5px); opacity: 0; transition: opacity 0.5s;
-}
+/* MENU */
+#monolith-menu { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.95); z-index: 2000; display: none; flex-direction: column; align-items: center; justify-content: center; backdrop-filter: blur(5px); opacity: 0; transition: opacity 0.5s; }
 #monolith-menu.active { display: flex; opacity: 1; }
-.hal-9000-eye {
-    width: 80px; height: 80px; background: #300; border-radius: 50%;
-    border: 4px solid #888; box-shadow: 0 0 20px #F00;
-    margin-bottom: 40px; cursor: pointer; transition: 0.3s;
-}
+.hal-9000-eye { width: 80px; height: 80px; background: #300; border-radius: 50%; border: 4px solid #888; box-shadow: 0 0 20px #F00; margin-bottom: 40px; cursor: pointer; transition: 0.3s; }
 .hal-9000-eye:hover { background: #F00; box-shadow: 0 0 50px #F00; transform: scale(1.1); }
 .menu-links { display: flex; flex-direction: column; gap: 20px; text-align: center; }
 .menu-links a { color: #FFF; text-decoration: none; font-size: 1.5rem; letter-spacing: 3px; border-bottom: 1px solid transparent; transition: 0.3s; }
@@ -166,17 +129,21 @@ header {
 .close-menu { margin-top: 50px; color: #555; cursor: pointer; font-size: 2rem; border: 1px solid #333; padding: 10px 20px; border-radius: 5px; }
 .close-menu:hover { color: #FFF; border-color: #FFF; }
 
-/* CONTAINER */
-.container { flex: 1; max-width: 1200px; margin: 20px auto; padding: 20px; border: 1px solid #333; background: rgba(0, 0, 0, 0.9); width: 95%; box-sizing: border-box; }
+/* LAYOUT */
+.container { flex: 1; max-width: 1400px; margin: 20px auto; padding: 20px; border: 1px solid #333; background: rgba(0, 0, 0, 0.9); width: 95%; box-sizing: border-box; }
 h1, h2 { border-bottom: 1px solid #0F0; color: #FFF; }
 .alert { border: 1px solid #F00; color: #F88; padding: 10px; }
 
-/* PHOTO GRID FIXED */
-.photo-grid-container { display: grid; gap: 20px; margin-top: 20px; }
-@media (min-width: 900px) { .photo-grid-container { grid-template-columns: repeat(3, 1fr); } }
-@media (max-width: 899px) { .photo-grid-container { grid-template-columns: 1fr; } }
+/* --- FIX 1: PHOTO GRID 4 COLUMNS --- */
+.photo-grid-container { display: grid; gap: 15px; margin-top: 20px; }
+/* Desktop: 4 columns */
+@media (min-width: 1200px) { .photo-grid-container { grid-template-columns: repeat(4, 1fr); } }
+/* Laptop/Tablet Landscape: 2 columns */
+@media (max-width: 1199px) and (min-width: 768px) { .photo-grid-container { grid-template-columns: repeat(2, 1fr); } }
+/* Mobile: 1 column */
+@media (max-width: 767px) { .photo-grid-container { grid-template-columns: 1fr; } }
 
-.widget-box { border: 1px solid #0F0; height: 500px; display: flex; flex-direction: column; background: #000; overflow: hidden; }
+.widget-box { border: 1px solid #0F0; height: 400px; display: flex; flex-direction: column; background: #000; overflow: hidden; }
 .widget-header { background: #002200; color: #0F0; padding: 5px; font-size: 0.8rem; border-bottom: 1px solid #0F0; flex-shrink: 0; }
 .widget-content { flex: 1; overflow: hidden; position: relative; }
 .widget-content iframe { width: 100%; height: 100%; border: none; }
@@ -194,25 +161,38 @@ h1, h2 { border-bottom: 1px solid #0F0; color: #FFF; }
 .alien-core:hover .status-light { background: #F00; box-shadow: 0 0 10px #F00; }
 .alien-core:hover .core-list { max-height: 300px; }
 
-/* HAL LINKS */
+/* HAL GRID */
 .hal-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 15px; margin-top: 20px; }
 .hal-btn { display: flex; flex-direction: column; align-items: center; padding: 15px; border: 1px solid #444; background: #111; color: #888; text-decoration: none; transition: 0.3s; }
 .hal-eye { width: 20px; height: 20px; background: #300; border-radius: 50%; margin-bottom: 10px; border: 2px solid #500; box-shadow: 0 0 5px #500; transition: 0.3s; }
 .hal-btn:hover { border-color: #F00; color: #FFF; background: #000; }
 .hal-btn:hover .hal-eye { background: #F00; border-color: #FFF; box-shadow: 0 0 15px #F00; transform: scale(1.2); }
 
-/* TERMINAL FIX */
+/* --- FIX 2: TERMINAL INPUT FLEXBOX --- */
 .terminal-window { background: #111; border: 1px solid #0F0; padding: 15px; height: 50vh; overflow-y: auto; font-family: 'Courier New', monospace; font-size: 1rem; text-align: left; }
-.input-line { display: flex; align-items: center; margin-top: 10px; border-top: 1px solid #333; padding-top: 5px; }
-.prompt { color: #0F0; margin-right: 10px; font-weight: bold; white-space: nowrap; }
-input#cmd { 
-    background: transparent; border: none; color: #FFF; 
-    font-family: 'Courier New', monospace; font-size: 1.1rem; 
-    flex-grow: 1; outline: none; width: 100%; display: block;
+.input-line { 
+    display: flex; 
+    align-items: baseline; /* Align text properly */
+    margin-top: 5px; 
 }
-#typewriter-content { visibility: hidden; }
-.cursor::after { content: '█'; animation: blink 1s infinite; color: #0F0; margin-left: 5px; }
-@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+.prompt { 
+    color: #0F0; 
+    margin-right: 10px; 
+    font-weight: bold; 
+    white-space: nowrap; /* Prevent breaking */
+    flex-shrink: 0;
+}
+input#cmd { 
+    background: transparent; 
+    border: none; 
+    color: #FFF; 
+    font-family: 'Courier New', monospace; 
+    font-size: 1rem; 
+    flex-grow: 1; 
+    outline: none; 
+    display: inline-block;
+    padding: 0; margin: 0;
+}
 
 /* FOOTER */
 footer { border-top: 1px dashed #0F0; padding: 20px; text-align: center; font-size: 0.8rem; color: #555; margin-top: auto; }
@@ -253,11 +233,10 @@ function toggleMenu() {
         setTimeout(() => menu.classList.add('active'), 10);
     }
 }
-
 function talkHal() { alert("I'm sorry, Dave. I'm afraid I can't do that."); }
 
-// TYPEWRITER & TERMINAL
 document.addEventListener("DOMContentLoaded", function() {
+    // TYPEWRITER
     const element = document.getElementById('typewriter-content');
     if (element) {
         const text = element.innerHTML;
@@ -278,15 +257,12 @@ document.addEventListener("DOMContentLoaded", function() {
         type();
     }
     
-    // FORCE FOCUS ON TERMINAL
+    // TERMINAL
     const input = document.getElementById("cmd");
     const history = document.getElementById("history");
     if(input) {
         input.focus();
-        // Keep focus
         document.querySelector('.terminal-window').addEventListener('click', () => input.focus());
-        input.addEventListener("blur", () => setTimeout(() => input.focus(), 10));
-        
         input.addEventListener("keydown", function(e) {
             if (e.key === "Enter") {
                 const rawCmd = input.value.trim();
@@ -385,6 +361,6 @@ for fname, content in pages.items():
 print("--- DEPLOYING ---")
 time.sleep(1)
 run("git add .")
-run(f'git commit -m "UkrGeekLife | Fixed Terminal & Grid | {time.strftime("%H:%M:%S")}"')
+run(f'git commit -m "UkrGeekLife | Fixed Terminal Input & 4-Col Grid | {time.strftime("%H:%M:%S")}"')
 run("git push origin master")
 print(">>> DONE.")

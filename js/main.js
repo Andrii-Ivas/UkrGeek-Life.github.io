@@ -28,11 +28,10 @@ function toggleMenu() {
         setTimeout(() => menu.classList.add('active'), 10);
     }
 }
-
 function talkHal() { alert("I'm sorry, Dave. I'm afraid I can't do that."); }
 
-// TYPEWRITER & TERMINAL
 document.addEventListener("DOMContentLoaded", function() {
+    // TYPEWRITER
     const element = document.getElementById('typewriter-content');
     if (element) {
         const text = element.innerHTML;
@@ -53,15 +52,12 @@ document.addEventListener("DOMContentLoaded", function() {
         type();
     }
     
-    // FORCE FOCUS ON TERMINAL
+    // TERMINAL
     const input = document.getElementById("cmd");
     const history = document.getElementById("history");
     if(input) {
         input.focus();
-        // Keep focus
         document.querySelector('.terminal-window').addEventListener('click', () => input.focus());
-        input.addEventListener("blur", () => setTimeout(() => input.focus(), 10));
-        
         input.addEventListener("keydown", function(e) {
             if (e.key === "Enter") {
                 const rawCmd = input.value.trim();
