@@ -30,6 +30,19 @@ function toggleMenu() {
 }
 function talkHal() { alert("I'm sorry, Dave. I'm afraid I can't do that."); }
 
+// ALIEN TRACKER LOGIC
+document.addEventListener('mousemove', (e) => {
+    const eye = document.getElementById('alien-eye');
+    if(eye) {
+        const rect = eye.getBoundingClientRect();
+        const x = rect.left + rect.width / 2;
+        const y = rect.top + rect.height / 2;
+        const rad = Math.atan2(e.clientX - x, e.clientY - y);
+        const rot = (rad * (180 / Math.PI) * -1) + 180;
+        eye.style.transform = `rotate(${rot}deg)`;
+    }
+});
+
 document.addEventListener("DOMContentLoaded", function() {
     // TYPEWRITER
     const element = document.getElementById('typewriter-content');
@@ -52,7 +65,7 @@ document.addEventListener("DOMContentLoaded", function() {
         type();
     }
     
-    // TERMINAL
+    // TERMINAL FOCUS
     const input = document.getElementById("cmd");
     const history = document.getElementById("history");
     if(input) {

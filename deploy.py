@@ -2,11 +2,9 @@
 import os, sys, subprocess, time, random
 
 # --- CONFIG ---
-# SPLIT IDENTITY CONSTANTS
 ID_PROJECT = "UkrGeekLife"
 ID_NAME = "Andrii Ivas"
-# RESTORED GLOBAL IDENTITY VARIABLE TO FIX ERROR
-IDENTITY = f"{ID_PROJECT} | {ID_NAME}"
+IDENTITY = f"{ID_PROJECT} | {ID_NAME}" # CRITICAL FIX: Defined before use
 
 sys.stdout.reconfigure(encoding='utf-8')
 
@@ -20,7 +18,8 @@ LINKS = {
     "TUMBLR": "https://www.tumblr.com/andre-ivas",
     "TWITCH": "https://www.twitch.tv/ivas_andre",
     "GITHUB": "https://github.com/ivas-andre",
-    "SPOTIFY": "https://open.spotify.com/playlist/1BG0k1dDJN14PczoyvSD6T?si=JVz8SvIGQHeba0XCCsulzQ" 
+    "SPOTIFY_LINK": "https://open.spotify.com/playlist/1BG0k1dDJN14PczoyvSD6T?si=JVz8SvIGQHeba0XCCsulzQ",
+    "SPOTIFY_EMBED_SRC": "https://open.spotify.com/embed/playlist/1BG0k1dDJN14PczoyvSD6T?utm_source=generator&theme=0"
 }
 VIDEO_ID = "-h7ygd0mp7c"
 
@@ -38,7 +37,7 @@ except: BASE_ABOUT = "<h1>ERROR</h1><p>File missing.</p>"
 
 # --- HTML CONTENT ---
 
-# IDENTITY PAGE (HAL LINKS FIXED STYLE)
+# 1. IDENTITY PAGE (ALIEN LINKS + TEXT + SPOTIFY AT BOTTOM)
 ALIEN_DROPDOWN = """
 <div class="alien-container">
     <div class="alien-core">
@@ -65,9 +64,16 @@ HAL_LINKS = f"""
     </div>
 </div>
 """
-ABOUT_CONTENT = ALIEN_DROPDOWN + BASE_ABOUT + HAL_LINKS
+# SPOTIFY IS HERE AT THE END
+SPOTIFY_SECTION = f"""
+<div style="margin-top: 50px; border-top: 1px dashed #0F0; padding-top: 20px;">
+    <h3 style="color: #0F0;">> /AUDIO_MANIFEST</h3>
+    <iframe style="border-radius:12px" src="{LINKS['SPOTIFY_EMBED_SRC']}" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+</div>
+"""
+ABOUT_CONTENT = ALIEN_DROPDOWN + BASE_ABOUT + HAL_LINKS + SPOTIFY_SECTION
 
-# PHOTO GRID (4 COLUMNS FIXED)
+# 2. PHOTO GRID (FIXED FLEXIBILITY)
 WIDGET_CODE = """
 <div class="widget-box">
     <div class="widget-header">CAM: INSTAGRAM</div>
@@ -78,19 +84,19 @@ WIDGET_CODE = """
 """
 PHOTO_CONTENT = f"""
 <h1>/GALLERY_GRID</h1>
-<p>Visual Database (8 Channels).</p>
+<p>Visual Database.</p>
 <div class="photo-grid-container">
     {WIDGET_CODE}{WIDGET_CODE}{WIDGET_CODE}{WIDGET_CODE}
     {WIDGET_CODE}{WIDGET_CODE}{WIDGET_CODE}{WIDGET_CODE}
 </div>
 """
 
-# TERMINAL (INPUT FIXED)
+# 3. TERMINAL (FIXED INPUT)
 CONTACT_CONTENT = """
 <h1>Terminal Access</h1>
 <div class='terminal-window'>
     <div id='history'>
-        <p>UkrGeekLife OS v24.1 (Identity Fix)...</p>
+        <p>UkrGeekLife OS v25.0 (Terminal Locked)...</p>
         <p>Type 'help'.</p>
     </div>
     <div class='input-line'>
@@ -100,8 +106,16 @@ CONTACT_CONTENT = """
 </div>
 """
 
-# OTHER PAGES
-INDEX_CONTENT = """<h1>SYSTEM INDEX</h1><ul style="list-style:none;padding:0;"><li><strong>01. Engineer:</strong> Patriot.</li><li><strong>02. Hate:</strong> 500k dead.</li><li><strong>03. Vegetarian:</strong> 10+ years.</li><li><strong>04. Atheist:</strong> Logic only.</li><li><strong>05. Automation:</strong> Scripts.</li><li><strong>06. Python:</strong> Weapon.</li><li><strong>07. Void:</strong> Survivor.</li><li><strong>08. Zoo:</strong> My family.</li><li><strong>09. UX:</strong> Design.</li><li><strong>10. Open Source:</strong> Share.</li></ul>"""
+# 4. INDEX PAGE (WITH ALIEN TRACKER)
+INDEX_CONTENT = """
+<h1>SYSTEM INDEX</h1>
+<div id="alien-tracker-container" style="text-align:center; margin: 20px 0;">
+    <div id="alien-eye" title="I SEE YOU"></div>
+    <p style="font-size:0.8rem; color:#555;">[ TARGET TRACKING ACTIVE ]</p>
+</div>
+<ul style="list-style:none;padding:0;"><li><strong>01. Engineer:</strong> Patriot.</li><li><strong>02. Hate:</strong> 500k dead.</li><li><strong>03. Vegetarian:</strong> 10+ years.</li><li><strong>04. Atheist:</strong> Logic only.</li><li><strong>05. Automation:</strong> Scripts.</li><li><strong>06. Python:</strong> Weapon.</li><li><strong>07. Void:</strong> Survivor.</li><li><strong>08. Zoo:</strong> My family.</li><li><strong>09. UX:</strong> Design.</li><li><strong>10. Open Source:</strong> Share.</li></ul>
+"""
+
 PROJECTS_CONTENT = """<h1>ARSENAL</h1><ul><li><strong>Growing Box:</strong> Hydroponics.</li><li><strong>Lighting:</strong> Spectrum.</li><li><strong>Global Box:</strong> Architecture.</li></ul><h2>SOCIAL</h2><ul><li><strong>Volunteer Cats:</strong> Helping animals.</li></ul>"""
 VIDEO_CONTENT = f"""<h1>/VIDEO_STREAM</h1><div class="video-wrapper"><iframe id="main-player" width="100%" height="450" src="https://www.youtube.com/embed/{VIDEO_ID}" frameborder="0" allowfullscreen></iframe></div>"""
 BLOG_CONTENT = """<h1>/SYS/LOG</h1><div class="log-entry"><span class="highlight">[2025]</span> REBOOT.</div>"""
@@ -109,24 +123,18 @@ PODCAST_CONTENT = """<h1>/AUDIO</h1><div class="alert">Offline.</div>"""
 
 # --- CSS ---
 CSS_CODE = """
+/* BASE */
 body { background-color: #050505; color: #0F0; font-family: 'Courier New', monospace; margin: 0; padding: 0; min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; }
 #matrix-bg { position: fixed; top: 0; left: 0; z-index: -1; opacity: 0.15; }
 
 /* HEADER - DIVIDED IDENTITY */
 header { background: #000; border-bottom: 2px solid #333; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; }
-
 .identity-wrapper { display: flex; align-items: center; gap: 10px; font-size: 1.1rem; font-weight: bold; color: #FFF; text-transform: uppercase; letter-spacing: 2px; }
-
-/* PART 1: UkrGeekLife (MENU TRIGGER) */
 .id-project { cursor: pointer; display: flex; align-items: center; gap: 10px; padding: 5px; transition: 0.3s; border: 1px solid transparent; }
 .id-project:hover { color: #F00; text-shadow: 0 0 10px #F00; border-color: #F00; background: rgba(20,0,0,0.5); }
 .hal-mini-eye { width: 15px; height: 15px; background: #500; border-radius: 50%; box-shadow: 0 0 5px #F00; transition: 0.3s; }
 .id-project:hover .hal-mini-eye { background: #F00; box-shadow: 0 0 15px #F00; }
-
-/* DIVIDER */
 .id-divider { color: #333; }
-
-/* PART 2: Andrii Ivas (HOME LINK) */
 .id-name { text-decoration: none; color: #FFF; padding: 5px; transition: 0.3s; border: 1px solid transparent; }
 .id-name:hover { color: #0F0; text-shadow: 0 0 10px #0F0; border-color: #0F0; background: rgba(0,20,0,0.5); }
 
@@ -151,20 +159,22 @@ header { background: #000; border-bottom: 2px solid #333; padding: 15px 20px; di
 h1, h2 { border-bottom: 1px solid #0F0; color: #FFF; }
 .alert { border: 1px solid #F00; color: #F88; padding: 10px; }
 
-/* --- FIX: PHOTO GRID 4 COLS + SQUARE ASPECT --- */
-.photo-grid-container { display: grid; gap: 15px; margin-top: 20px; }
-/* Desktop: 4 cols */
+/* --- FIX: PHOTO GRID FLEXIBILITY --- */
+.photo-grid-container { 
+    display: grid; 
+    gap: 15px; 
+    margin-top: 20px; 
+}
 @media (min-width: 1200px) { .photo-grid-container { grid-template-columns: repeat(4, 1fr); } }
-/* Laptop: 2 cols */
 @media (max-width: 1199px) and (min-width: 768px) { .photo-grid-container { grid-template-columns: repeat(2, 1fr); } }
-/* Mobile: 1 col */
 @media (max-width: 767px) { .photo-grid-container { grid-template-columns: 1fr; } }
 
 .widget-box { 
     border: 1px solid #0F0; 
     background: #000; 
     display: flex; flex-direction: column;
-    aspect-ratio: 1 / 1; /* Force Square */
+    width: 100%;
+    aspect-ratio: 1 / 1; /* LOCKS SQUARE SHAPE */
     overflow: hidden; 
 }
 .widget-header { background: #002200; color: #0F0; padding: 5px; font-size: 0.8rem; border-bottom: 1px solid #0F0; flex-shrink: 0; }
@@ -191,11 +201,23 @@ h1, h2 { border-bottom: 1px solid #0F0; color: #FFF; }
 .hal-btn:hover { border-color: #F00; color: #FFF; background: #000; }
 .hal-btn:hover .hal-eye { background: #F00; border-color: #FFF; box-shadow: 0 0 15px #F00; transform: scale(1.2); }
 
-/* TERMINAL FIX */
+/* --- FIX: TERMINAL INPUT --- */
 .terminal-window { background: #111; border: 1px solid #0F0; padding: 15px; height: 50vh; overflow-y: auto; font-family: 'Courier New', monospace; font-size: 1rem; text-align: left; }
 .input-line { display: flex; align-items: center; margin-top: 5px; }
 .prompt { color: #0F0; margin-right: 10px; font-weight: bold; white-space: nowrap; flex-shrink: 0; }
-input#cmd { background: transparent; border: none; color: #FFF; font-family: 'Courier New', monospace; font-size: 1rem; flex-grow: 1; outline: none; padding: 0; margin: 0; }
+input#cmd { 
+    background: transparent; border: none; color: #FFF; 
+    font-family: 'Courier New', monospace; font-size: 1rem; 
+    flex-grow: 1; outline: none; padding: 0; margin: 0; 
+}
+
+/* ALIEN TRACKER EGG */
+#alien-eye {
+    width: 60px; height: 60px; background: radial-gradient(circle, #000 30%, #3F3 31%, #050 100%);
+    border-radius: 50%; border: 2px solid #0F0; margin: 0 auto 10px;
+    box-shadow: 0 0 15px #0F0;
+    transition: transform 0.1s linear; /* Smooth tracking */
+}
 
 /* FOOTER */
 footer { border-top: 1px dashed #0F0; padding: 20px; text-align: center; font-size: 0.8rem; color: #555; margin-top: auto; }
@@ -238,6 +260,19 @@ function toggleMenu() {
 }
 function talkHal() { alert("I'm sorry, Dave. I'm afraid I can't do that."); }
 
+// ALIEN TRACKER LOGIC
+document.addEventListener('mousemove', (e) => {
+    const eye = document.getElementById('alien-eye');
+    if(eye) {
+        const rect = eye.getBoundingClientRect();
+        const x = rect.left + rect.width / 2;
+        const y = rect.top + rect.height / 2;
+        const rad = Math.atan2(e.clientX - x, e.clientY - y);
+        const rot = (rad * (180 / Math.PI) * -1) + 180;
+        eye.style.transform = `rotate(${rot}deg)`;
+    }
+});
+
 document.addEventListener("DOMContentLoaded", function() {
     // TYPEWRITER
     const element = document.getElementById('typewriter-content');
@@ -260,7 +295,7 @@ document.addEventListener("DOMContentLoaded", function() {
         type();
     }
     
-    // TERMINAL
+    // TERMINAL FOCUS
     const input = document.getElementById("cmd");
     const history = document.getElementById("history");
     if(input) {
@@ -337,7 +372,7 @@ BASE_HTML = f"""<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta
     <div class="footer-links">
         <a href="{LINKS['X']}"><i class="fab fa-twitter"></i></a><a href="{LINKS['TUMBLR']}"><i class="fab fa-tumblr"></i></a>
         <a href="{LINKS['TWITCH']}"><i class="fab fa-twitch"></i></a><a href="{LINKS['GITHUB']}"><i class="fab fa-github"></i></a>
-        <a href="{LINKS['SPOTIFY']}"><i class="fab fa-spotify"></i></a>
+        <a href="{LINKS['SPOTIFY_LINK']}"><i class="fab fa-spotify"></i></a>
         <a href="{LINKS['INSTA_PHOTO']}"><i class="fas fa-camera"></i></a>
     </div>
     <div style="margin-top:10px;opacity:0.5;font-size:0.7rem;">© 2025 {IDENTITY} | NO FORGIVENESS</div>
@@ -365,6 +400,6 @@ for fname, content in pages.items():
 print("--- DEPLOYING ---")
 time.sleep(1)
 run("git add .")
-run(f'git commit -m "UkrGeekLife | SPLIT IDENTITY & GRID FIX | {time.strftime("%H:%M:%S")}"')
+run(f'git commit -m "UkrGeekLife | FINAL FIX v2 | {time.strftime("%H:%M:%S")}"')
 run("git push origin master")
 print(">>> DONE.")
