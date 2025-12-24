@@ -18,12 +18,34 @@ function draw() {
 setInterval(draw, 33);
 window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; });
 
-function killSystem() { document.body.innerHTML='<div style="display:flex;justify-content:center;align-items:center;height:100vh;background:#000;color:red;font-size:2rem;">SYSTEM HALTED</div>'; }
-function toggleMenu() { document.querySelector('nav').classList.toggle('active'); }
+// MENU TOGGLE (THE SPACE ODYSSEY POP-UP)
+function toggleMenu() { 
+    const menu = document.getElementById('monolith-menu');
+    if (menu.classList.contains('active')) {
+        menu.classList.remove('active');
+        setTimeout(() => menu.style.display = 'none', 500);
+    } else {
+        menu.style.display = 'flex';
+        setTimeout(() => menu.classList.add('active'), 10);
+    }
+}
 
-// TERMINAL & TYPEWRITER
+// EASTER EGG: HAL 9000
+function talkHal() { alert("I'm sorry, Dave. I'm afraid I can't do that."); }
+
+// EASTER EGG: KONAMI CODE
+let konami = "";
+document.addEventListener('keydown', (e) => {
+    konami += e.key;
+    if (konami.includes("ArrowUpArrowUpArrowDownArrowDownArrowLeftArrowRightArrowLeftArrowRightba")) {
+        alert("ALIEN PROTOCOL INITIATED");
+        document.body.style.filter = "invert(1)";
+        konami = "";
+    }
+});
+
+// TYPEWRITER & TERMINAL
 document.addEventListener("DOMContentLoaded", function() {
-    // TYPEWRITER
     const element = document.getElementById('typewriter-content');
     if (element) {
         const text = element.innerHTML;
@@ -38,12 +60,12 @@ document.addEventListener("DOMContentLoaded", function() {
                     while (text.charAt(i) !== '>' && i < text.length) { tag += text.charAt(i); i++; }
                     tag += '>'; i++; element.innerHTML += tag;
                 } else { element.innerHTML += text.charAt(i); i++; }
-                setTimeout(type, 1); // Fast typing
+                setTimeout(type, 1);
             }
         }
         type();
     }
-    // TERMINAL
+    
     const input = document.getElementById("cmd");
     const history = document.getElementById("history");
     if(input) {
@@ -56,13 +78,12 @@ document.addEventListener("DOMContentLoaded", function() {
                 history.innerHTML += `<div><span class="prompt">root@ukrgeek:~#</span> ${rawCmd}</div>`;
                 let res = "";
                 switch(cmd) {
-                    case "help": res = "COMMANDS: [about] [photo] [video] [blog] [slava] [kill]"; break;
+                    case "help": res = "COMMANDS: [about] [photo] [video] [blog] [slava]"; break;
                     case "about": window.location='about.html'; break;
                     case "photo": window.location='photo.html'; break;
                     case "video": window.location='video.html'; break;
                     case "blog": window.location='blog.html'; break;
                     case "slava": res = "<span style='color:yellow'>GEROYAM SLAVA!</span>"; break;
-                    case "kill": killSystem(); break;
                     case "clear": history.innerHTML = ""; break;
                     case "": res = ""; break;
                     default: res = `<span style='color:red'>bash: ${rawCmd}: command not found</span>`;

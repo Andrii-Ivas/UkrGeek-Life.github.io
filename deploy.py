@@ -33,36 +33,7 @@ except: BASE_ABOUT = "<h1>ERROR</h1><p>File missing.</p>"
 
 # --- HTML CONTENT ---
 
-# IDENTITY (ALIEN DROPDOWN + HAL LINKS)
-ALIEN_DROPDOWN = """
-<div class="alien-container">
-    <div class="alien-core">
-        <div class="core-header"><span class="status-light"></span>[ HOVER TO ACCESS DATA STREAMS ]</div>
-        <div class="core-list">
-            <a href="photo.html">> /VISUAL_DATA (PHOTOS)</a>
-            <a href="video.html">> /VIDEO_FEED</a>
-            <a href="blog.html">> /SYS_LOGS (BLOG)</a>
-            <a href="podcast.html">> /AUDIO_WAVES</a>
-        </div>
-    </div>
-</div>
-"""
-HAL_LINKS = f"""
-<div style="margin-top:40px;border-top:2px solid #333;padding-top:20px;">
-    <h2 style="color:#FFF;">> DIRECT_UPLINK</h2>
-    <div class="hal-grid">
-        <a href="{LINKS['YOUTUBE']}" target="_blank" class="hal-btn"><div class="hal-eye"></div><span>YOUTUBE</span></a>
-        <a href="{LINKS['INSTA_MAIN']}" target="_blank" class="hal-btn"><div class="hal-eye"></div><span>LIFE</span></a>
-        <a href="{LINKS['INSTA_PHOTO']}" target="_blank" class="hal-btn"><div class="hal-eye"></div><span>PHOTO</span></a>
-        <a href="{LINKS['LINKEDIN']}" target="_blank" class="hal-btn"><div class="hal-eye"></div><span>WORK</span></a>
-        <a href="{LINKS['GITHUB']}" target="_blank" class="hal-btn"><div class="hal-eye"></div><span>CODE</span></a>
-        <a href="{LINKS['FACEBOOK']}" target="_blank" class="hal-btn"><div class="hal-eye"></div><span>FB</span></a>
-    </div>
-</div>
-"""
-ABOUT_CONTENT = ALIEN_DROPDOWN + BASE_ABOUT + HAL_LINKS
-
-# PHOTO GRID
+# PHOTO PAGE (GRID)
 PHOTO_CONTENT = """
 <h1>/GALLERY_GRID</h1>
 <p>Visual Database.</p>
@@ -85,7 +56,7 @@ PHOTO_CONTENT = """
 CONTACT_CONTENT = """
 <h1>Terminal Access</h1>
 <div class='terminal-window'>
-    <div id='history'><p>UkrGeekLife OS v19.0...</p><p>Input restored. Type 'help'.</p></div>
+    <div id='history'><p>UkrGeekLife OS v20.0 (Odyssey Edition)...</p><p>Type 'help'.</p></div>
     <div class='input-line'><span class='prompt'>root@ukrgeek:~#</span><input type='text' id='cmd' autofocus autocomplete='off' spellcheck='false'></div>
 </div>
 """
@@ -99,26 +70,78 @@ PODCAST_CONTENT = """<h1>/AUDIO</h1><div class="alert">Offline.</div>"""
 
 # --- CSS ---
 CSS_CODE = """
+/* BASE */
 body { background-color: #050505; color: #0F0; font-family: 'Courier New', monospace; margin: 0; padding: 0; min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; }
 #matrix-bg { position: fixed; top: 0; left: 0; z-index: -1; opacity: 0.15; }
-header { background: #1a1a1a; border-bottom: 1px solid #333; padding: 10px 15px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; }
-.header-social { display: flex; gap: 15px; }
-.social-icon { color: #888; font-size: 1.2rem; text-decoration: none; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; border: 1px solid #333; background: rgba(0,0,0,0.5); border-radius: 4px; }
-.social-icon:hover { color: #0F0; border-color: #0F0; box-shadow: 0 0 8px #0F0; }
-nav { display: flex; gap: 10px; }
-nav a { color: #FFF; text-decoration: none; font-size: 0.9rem; padding: 5px; }
-nav a:hover { color: #0F0; background: #111; }
-.burger-menu { display: none; cursor: pointer; color: #0F0; font-size: 1.5rem; }
-@media(max-width: 900px) { 
-    nav { display: none; position: absolute; top: 50px; right: 0; background: #000; border: 1px solid #0F0; flex-direction: column; width: 200px; } 
-    nav.active { display: flex; }
-    .burger-menu { display: block; }
-    .header-social { display: none; }
+
+/* HEADER - THE SPACE ODYSSEY STYLE */
+header { 
+    background: #000; border-bottom: 2px solid #333; 
+    padding: 15px 20px; 
+    display: flex; justify-content: space-between; align-items: center; 
+    position: sticky; top: 0; z-index: 1000;
 }
+
+/* IDENTITY (THE TRIGGER) */
+.identity-trigger { 
+    font-size: 1.1rem; font-weight: bold; color: #FFF; 
+    cursor: pointer; letter-spacing: 2px; text-transform: uppercase;
+    border: 1px solid transparent; padding: 5px 10px; transition: 0.3s;
+    display: flex; align-items: center; gap: 10px;
+}
+.identity-trigger:hover { 
+    color: #F00; border-color: #F00; text-shadow: 0 0 10px #F00; 
+    background: rgba(20, 0, 0, 0.8);
+}
+.hal-mini-eye {
+    width: 15px; height: 15px; background: #500; border-radius: 50%; 
+    box-shadow: 0 0 5px #F00; transition: 0.3s;
+}
+.identity-trigger:hover .hal-mini-eye { background: #F00; box-shadow: 0 0 15px #F00; }
+
+/* SOCIAL ICONS (CLEAN RIGHT) */
+.header-social { display: flex; gap: 10px; }
+.social-icon { 
+    color: #555; font-size: 1.1rem; text-decoration: none; 
+    width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; 
+    border: 1px solid #222; background: #000; border-radius: 50%; transition: 0.3s;
+}
+.social-icon:hover { color: #FFF; border-color: #FFF; box-shadow: 0 0 10px #FFF; }
+
+/* THE MONOLITH MENU (POP-UP) */
+#monolith-menu {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.95); z-index: 2000;
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    backdrop-filter: blur(5px); opacity: 0; transition: opacity 0.5s;
+}
+#monolith-menu.active { display: flex; opacity: 1; }
+
+.hal-9000-eye {
+    width: 80px; height: 80px; background: #300; border-radius: 50%;
+    border: 4px solid #888; box-shadow: 0 0 20px #F00;
+    margin-bottom: 40px; cursor: pointer; transition: 0.3s;
+}
+.hal-9000-eye:hover { background: #F00; box-shadow: 0 0 50px #F00; transform: scale(1.1); }
+
+.menu-links { display: flex; flex-direction: column; gap: 20px; text-align: center; }
+.menu-links a { 
+    color: #FFF; text-decoration: none; font-size: 1.5rem; letter-spacing: 3px; 
+    border-bottom: 1px solid transparent; transition: 0.3s;
+}
+.menu-links a:hover { color: #F00; border-bottom: 1px solid #F00; letter-spacing: 5px; }
+.close-menu { 
+    margin-top: 50px; color: #555; cursor: pointer; font-size: 2rem; 
+    border: 1px solid #333; padding: 10px 20px; border-radius: 5px; 
+}
+.close-menu:hover { color: #FFF; border-color: #FFF; }
+
+/* CONTAINER & GRID */
 .container { flex: 1; max-width: 1200px; margin: 20px auto; padding: 20px; border: 1px solid #333; background: rgba(0, 0, 0, 0.9); width: 95%; box-sizing: border-box; }
 h1, h2 { border-bottom: 1px solid #0F0; color: #FFF; }
 .alert { border: 1px solid #F00; color: #F88; padding: 10px; }
-/* PHOTO GRID */
+
+/* PHOTO GRID (3 COLS DESKTOP / 1 MOBILE) */
 .photo-grid-container { display: grid; gap: 20px; margin-top: 20px; }
 @media (min-width: 900px) { .photo-grid-container { grid-template-columns: repeat(3, 1fr); } }
 @media (max-width: 899px) { .photo-grid-container { grid-template-columns: 1fr; } }
@@ -128,24 +151,7 @@ h1, h2 { border-bottom: 1px solid #0F0; color: #FFF; }
 .widget-content iframe { width: 100%; height: 100%; border: none; }
 .placeholder .widget-header { background: #222; color: #888; border-color: #555; }
 .static-noise { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #444; background: repeating-linear-gradient(0deg, #111, #111 2px, #222 3px); }
-/* ALIEN DROPDOWN */
-.alien-container { margin-bottom: 30px; }
-.alien-core { border: 1px solid #0F0; background: #050505; transition: 0.4s; overflow: hidden; }
-.core-header { padding: 15px; cursor: pointer; font-weight: bold; letter-spacing: 2px; text-align: center; }
-.status-light { display: inline-block; width: 10px; height: 10px; background: #0F0; border-radius: 50%; margin-right: 10px; box-shadow: 0 0 5px #0F0; }
-.core-list { max-height: 0; transition: 0.4s; background: #100; display: flex; flex-direction: column; text-align: center; }
-.core-list a { padding: 10px; color: #F55; text-decoration: none; border-bottom: 1px solid #300; transition: 0.2s; }
-.core-list a:hover { background: #300; color: #FFF; letter-spacing: 3px; }
-.alien-core:hover { border-color: #F00; box-shadow: 0 0 15px rgba(255,0,0,0.3); }
-.alien-core:hover .core-header { color: #F00; }
-.alien-core:hover .status-light { background: #F00; box-shadow: 0 0 10px #F00; }
-.alien-core:hover .core-list { max-height: 300px; }
-/* HAL LINKS */
-.hal-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 15px; margin-top: 20px; }
-.hal-btn { display: flex; flex-direction: column; align-items: center; padding: 15px; border: 1px solid #444; background: #111; color: #888; text-decoration: none; transition: 0.3s; }
-.hal-eye { width: 20px; height: 20px; background: #300; border-radius: 50%; margin-bottom: 10px; border: 2px solid #500; box-shadow: 0 0 5px #500; transition: 0.3s; }
-.hal-btn:hover { border-color: #F00; color: #FFF; background: #000; }
-.hal-btn:hover .hal-eye { background: #F00; border-color: #FFF; box-shadow: 0 0 15px #F00; transform: scale(1.2); }
+
 /* TERMINAL */
 .terminal-window { background: #111; border: 1px solid #0F0; padding: 15px; height: 50vh; overflow-y: auto; font-family: 'Courier New', monospace; font-size: 1rem; text-align: left; }
 .input-line { display: flex; align-items: center; margin-top: 10px; }
@@ -154,6 +160,7 @@ input#cmd { background: transparent; border: none; color: #FFF; font-family: 'Co
 #typewriter-content { visibility: hidden; }
 .cursor::after { content: '█'; animation: blink 1s infinite; color: #0F0; margin-left: 5px; }
 @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
 /* FOOTER */
 footer { border-top: 1px dashed #0F0; padding: 20px; text-align: center; font-size: 0.8rem; color: #555; margin-top: auto; }
 .footer-links { margin-top: 10px; }
@@ -162,7 +169,7 @@ footer { border-top: 1px dashed #0F0; padding: 20px; text-align: center; font-si
 .video-wrapper { border: 2px solid #0F0; padding: 5px; background: #000; }
 """
 
-# --- JS (RESTORED TYPEWRITER & TERMINAL) ---
+# --- JS ---
 JS_MAIN = """
 const canvas = document.getElementById('matrix-bg');
 const ctx = canvas.getContext('2d');
@@ -183,12 +190,34 @@ function draw() {
 setInterval(draw, 33);
 window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; });
 
-function killSystem() { document.body.innerHTML='<div style="display:flex;justify-content:center;align-items:center;height:100vh;background:#000;color:red;font-size:2rem;">SYSTEM HALTED</div>'; }
-function toggleMenu() { document.querySelector('nav').classList.toggle('active'); }
+// MENU TOGGLE (THE SPACE ODYSSEY POP-UP)
+function toggleMenu() { 
+    const menu = document.getElementById('monolith-menu');
+    if (menu.classList.contains('active')) {
+        menu.classList.remove('active');
+        setTimeout(() => menu.style.display = 'none', 500);
+    } else {
+        menu.style.display = 'flex';
+        setTimeout(() => menu.classList.add('active'), 10);
+    }
+}
 
-// TERMINAL & TYPEWRITER
+// EASTER EGG: HAL 9000
+function talkHal() { alert("I'm sorry, Dave. I'm afraid I can't do that."); }
+
+// EASTER EGG: KONAMI CODE
+let konami = "";
+document.addEventListener('keydown', (e) => {
+    konami += e.key;
+    if (konami.includes("ArrowUpArrowUpArrowDownArrowDownArrowLeftArrowRightArrowLeftArrowRightba")) {
+        alert("ALIEN PROTOCOL INITIATED");
+        document.body.style.filter = "invert(1)";
+        konami = "";
+    }
+});
+
+// TYPEWRITER & TERMINAL
 document.addEventListener("DOMContentLoaded", function() {
-    // TYPEWRITER
     const element = document.getElementById('typewriter-content');
     if (element) {
         const text = element.innerHTML;
@@ -203,12 +232,12 @@ document.addEventListener("DOMContentLoaded", function() {
                     while (text.charAt(i) !== '>' && i < text.length) { tag += text.charAt(i); i++; }
                     tag += '>'; i++; element.innerHTML += tag;
                 } else { element.innerHTML += text.charAt(i); i++; }
-                setTimeout(type, 1); // Fast typing
+                setTimeout(type, 1);
             }
         }
         type();
     }
-    // TERMINAL
+    
     const input = document.getElementById("cmd");
     const history = document.getElementById("history");
     if(input) {
@@ -221,13 +250,12 @@ document.addEventListener("DOMContentLoaded", function() {
                 history.innerHTML += `<div><span class="prompt">root@ukrgeek:~#</span> ${rawCmd}</div>`;
                 let res = "";
                 switch(cmd) {
-                    case "help": res = "COMMANDS: [about] [photo] [video] [blog] [slava] [kill]"; break;
+                    case "help": res = "COMMANDS: [about] [photo] [video] [blog] [slava]"; break;
                     case "about": window.location='about.html'; break;
                     case "photo": window.location='photo.html'; break;
                     case "video": window.location='video.html'; break;
                     case "blog": window.location='blog.html'; break;
                     case "slava": res = "<span style='color:yellow'>GEROYAM SLAVA!</span>"; break;
-                    case "kill": killSystem(); break;
                     case "clear": history.innerHTML = ""; break;
                     case "": res = ""; break;
                     default: res = `<span style='color:red'>bash: ${rawCmd}: command not found</span>`;
@@ -241,27 +269,41 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 """
 
-# --- BUILD ---
+# --- TEMPLATES ---
 BASE_HTML = """<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>{title}</title>
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head><body><canvas id="matrix-bg"></canvas>
+
+<div id="monolith-menu">
+    <div class="hal-9000-eye" onclick="talkHal()"></div>
+    <div class="menu-links">
+        <a href="index.html">/HOME_BASE</a>
+        <a href="about.html">/IDENTITY_CORE</a>
+        <a href="projects.html">/ARSENAL_WEAPONS</a>
+        <a href="photo.html">/VISUAL_FEED</a>
+        <a href="video.html">/VIDEO_STREAM</a>
+        <a href="blog.html">/SYSTEM_LOGS</a>
+        <a href="contact.html">/COMMAND_LINE</a>
+    </div>
+    <div class="close-menu" onclick="toggleMenu()">[ CLOSE CONNECTION ]</div>
+</div>
+
 <header>
-    <div style="display:flex; gap:10px;"><div class="dot red" style="width:12px;height:12px;background:#f55;border-radius:50%;cursor:pointer;" onclick="killSystem()"></div><span style="color:#888;font-weight:bold;">root@ukrgeek:~</span></div>
+    <div class="identity-trigger" onclick="toggleMenu()">
+        <div class="hal-mini-eye"></div>
+        <span>{id}</span>
+    </div>
     <div class="header-social">
         <a href="{yt}" class="social-icon"><i class="fab fa-youtube"></i></a>
         <a href="{im}" class="social-icon"><i class="fab fa-instagram"></i></a>
         <a href="{fb}" class="social-icon"><i class="fab fa-facebook"></i></a>
         <a href="{li}" class="social-icon"><i class="fab fa-linkedin"></i></a>
     </div>
-    <nav>
-        <a href="index.html">/HOME</a><a href="about.html">/IDENTITY</a><a href="projects.html">/ARSENAL</a>
-        <a href="photo.html">/PHOTO</a><a href="video.html">/VIDEO</a><a href="blog.html">/BLOG</a>
-        <a href="contact.html">/TERMINAL</a>
-    </nav>
-    <div class="burger-menu" onclick="toggleMenu()">[MENU]</div>
 </header>
+
 <main class="container"><div id="typewriter-content">{content}</div></main>
+
 <footer>
     <div style="margin-bottom:10px;">[ SYSTEM RESOURCES: 4 CATS | 2 DOGS | 1 RAT | 1 TURTLE ]</div>
     <div class="footer-links">
@@ -275,6 +317,7 @@ BASE_HTML = """<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta 
 <script src="js/main.js"></script>
 </body></html>"""
 
+# --- EXECUTION ---
 print("--- WRITING FILES ---")
 os.makedirs("css", exist_ok=True)
 os.makedirs("js", exist_ok=True)
@@ -282,7 +325,7 @@ with open("css/style.css", "w", encoding="utf-8") as f: f.write(CSS_CODE)
 with open("js/main.js", "w", encoding="utf-8") as f: f.write(JS_MAIN)
 
 pages = {
-    "index.html": INDEX_CONTENT, "about.html": ABOUT_CONTENT, "projects.html": PROJECTS_CONTENT,
+    "index.html": INDEX_CONTENT, "about.html": BASE_ABOUT, "projects.html": PROJECTS_CONTENT,
     "photo.html": PHOTO_CONTENT, "video.html": VIDEO_CONTENT, "blog.html": BLOG_CONTENT,
     "podcast.html": PODCAST_CONTENT, "contact.html": CONTACT_CONTENT
 }
@@ -299,6 +342,6 @@ for fname, content in pages.items():
 print("--- DEPLOYING ---")
 time.sleep(1)
 run("git add .")
-run(f'git commit -m "UkrGeekLife | REPAIRED ALL | {time.strftime("%H:%M:%S")}"')
+run(f'git commit -m "UkrGeekLife | Space Odyssey Menu | {time.strftime("%H:%M:%S")}"')
 run("git push origin master")
-print(">>> DONE. EVERYTHING RESTORED.")
+print(">>> DONE.")

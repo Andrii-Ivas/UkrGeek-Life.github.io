@@ -2,34 +2,35 @@
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head><body><canvas id="matrix-bg"></canvas>
+
+<div id="monolith-menu">
+    <div class="hal-9000-eye" onclick="talkHal()"></div>
+    <div class="menu-links">
+        <a href="index.html">/HOME_BASE</a>
+        <a href="about.html">/IDENTITY_CORE</a>
+        <a href="projects.html">/ARSENAL_WEAPONS</a>
+        <a href="photo.html">/VISUAL_FEED</a>
+        <a href="video.html">/VIDEO_STREAM</a>
+        <a href="blog.html">/SYSTEM_LOGS</a>
+        <a href="contact.html">/COMMAND_LINE</a>
+    </div>
+    <div class="close-menu" onclick="toggleMenu()">[ CLOSE CONNECTION ]</div>
+</div>
+
 <header>
-    <div style="display:flex; gap:10px;"><div class="dot red" style="width:12px;height:12px;background:#f55;border-radius:50%;cursor:pointer;" onclick="killSystem()"></div><span style="color:#888;font-weight:bold;">root@ukrgeek:~</span></div>
+    <div class="identity-trigger" onclick="toggleMenu()">
+        <div class="hal-mini-eye"></div>
+        <span>UkrGeekLife | Andrii Ivas</span>
+    </div>
     <div class="header-social">
         <a href="https://www.youtube.com/@UkrGeekLife" class="social-icon"><i class="fab fa-youtube"></i></a>
         <a href="https://www.instagram.com/ivas_andrii/" class="social-icon"><i class="fab fa-instagram"></i></a>
         <a href="https://www.facebook.com/Andrii.Ivas/" class="social-icon"><i class="fab fa-facebook"></i></a>
         <a href="https://www.linkedin.com/in/ivas-andre/" class="social-icon"><i class="fab fa-linkedin"></i></a>
     </div>
-    <nav>
-        <a href="index.html">/HOME</a><a href="about.html">/IDENTITY</a><a href="projects.html">/ARSENAL</a>
-        <a href="photo.html">/PHOTO</a><a href="video.html">/VIDEO</a><a href="blog.html">/BLOG</a>
-        <a href="contact.html">/TERMINAL</a>
-    </nav>
-    <div class="burger-menu" onclick="toggleMenu()">[MENU]</div>
 </header>
-<main class="container"><div id="typewriter-content">
-<div class="alien-container">
-    <div class="alien-core">
-        <div class="core-header"><span class="status-light"></span>[ HOVER TO ACCESS DATA STREAMS ]</div>
-        <div class="core-list">
-            <a href="photo.html">> /VISUAL_DATA (PHOTOS)</a>
-            <a href="video.html">> /VIDEO_FEED</a>
-            <a href="blog.html">> /SYS_LOGS (BLOG)</a>
-            <a href="podcast.html">> /AUDIO_WAVES</a>
-        </div>
-    </div>
-</div>
-<h1>The Protocol: No Gods, No Masters, No Forgiveness</h1>
+
+<main class="container"><div id="typewriter-content"><h1>The Protocol: No Gods, No Masters, No Forgiveness</h1>
 <p>Let’s be crystal clear. Я не буду підбирати слова, щоб комусь було "комфортно". Comfort is a lie. Реальність — це датасет, і він часто буває потворним.</p>
 
 <h2>1. The Enemy & The Context</h2>
@@ -65,19 +66,8 @@ I looked around and realized: God doesn't exist. Religion is a control system fo
 <h2>5. The Bottom Line</h2>
 <p>Я люблю старі камери, люблю вело, люблю збирати старий софт. Я ціную історію, бо це факти.<br>
 Але я не живу вчорашнім днем. Важливий кожен байт інформації сьогодні, щоб не проїбати завтра.</p>
-<p class="red-alert">Бережіть свої кордони. Бо мої — заміновані.</p>
-<div style="margin-top:40px;border-top:2px solid #333;padding-top:20px;">
-    <h2 style="color:#FFF;">> DIRECT_UPLINK</h2>
-    <div class="hal-grid">
-        <a href="https://www.youtube.com/@UkrGeekLife" target="_blank" class="hal-btn"><div class="hal-eye"></div><span>YOUTUBE</span></a>
-        <a href="https://www.instagram.com/ivas_andrii/" target="_blank" class="hal-btn"><div class="hal-eye"></div><span>LIFE</span></a>
-        <a href="https://www.instagram.com/andrii_photographer/" target="_blank" class="hal-btn"><div class="hal-eye"></div><span>PHOTO</span></a>
-        <a href="https://www.linkedin.com/in/ivas-andre/" target="_blank" class="hal-btn"><div class="hal-eye"></div><span>WORK</span></a>
-        <a href="https://github.com/ivas-andre" target="_blank" class="hal-btn"><div class="hal-eye"></div><span>CODE</span></a>
-        <a href="https://www.facebook.com/Andrii.Ivas/" target="_blank" class="hal-btn"><div class="hal-eye"></div><span>FB</span></a>
-    </div>
-</div>
-</div></main>
+<p class="red-alert">Бережіть свої кордони. Бо мої — заміновані.</p></div></main>
+
 <footer>
     <div style="margin-bottom:10px;">[ SYSTEM RESOURCES: 4 CATS | 2 DOGS | 1 RAT | 1 TURTLE ]</div>
     <div class="footer-links">

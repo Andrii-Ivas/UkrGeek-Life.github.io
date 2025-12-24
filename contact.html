@@ -2,28 +2,42 @@
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head><body><canvas id="matrix-bg"></canvas>
+
+<div id="monolith-menu">
+    <div class="hal-9000-eye" onclick="talkHal()"></div>
+    <div class="menu-links">
+        <a href="index.html">/HOME_BASE</a>
+        <a href="about.html">/IDENTITY_CORE</a>
+        <a href="projects.html">/ARSENAL_WEAPONS</a>
+        <a href="photo.html">/VISUAL_FEED</a>
+        <a href="video.html">/VIDEO_STREAM</a>
+        <a href="blog.html">/SYSTEM_LOGS</a>
+        <a href="contact.html">/COMMAND_LINE</a>
+    </div>
+    <div class="close-menu" onclick="toggleMenu()">[ CLOSE CONNECTION ]</div>
+</div>
+
 <header>
-    <div style="display:flex; gap:10px;"><div class="dot red" style="width:12px;height:12px;background:#f55;border-radius:50%;cursor:pointer;" onclick="killSystem()"></div><span style="color:#888;font-weight:bold;">root@ukrgeek:~</span></div>
+    <div class="identity-trigger" onclick="toggleMenu()">
+        <div class="hal-mini-eye"></div>
+        <span>UkrGeekLife | Andrii Ivas</span>
+    </div>
     <div class="header-social">
         <a href="https://www.youtube.com/@UkrGeekLife" class="social-icon"><i class="fab fa-youtube"></i></a>
         <a href="https://www.instagram.com/ivas_andrii/" class="social-icon"><i class="fab fa-instagram"></i></a>
         <a href="https://www.facebook.com/Andrii.Ivas/" class="social-icon"><i class="fab fa-facebook"></i></a>
         <a href="https://www.linkedin.com/in/ivas-andre/" class="social-icon"><i class="fab fa-linkedin"></i></a>
     </div>
-    <nav>
-        <a href="index.html">/HOME</a><a href="about.html">/IDENTITY</a><a href="projects.html">/ARSENAL</a>
-        <a href="photo.html">/PHOTO</a><a href="video.html">/VIDEO</a><a href="blog.html">/BLOG</a>
-        <a href="contact.html">/TERMINAL</a>
-    </nav>
-    <div class="burger-menu" onclick="toggleMenu()">[MENU]</div>
 </header>
+
 <main class="container"><div id="typewriter-content">
 <h1>Terminal Access</h1>
 <div class='terminal-window'>
-    <div id='history'><p>UkrGeekLife OS v19.0...</p><p>Input restored. Type 'help'.</p></div>
+    <div id='history'><p>UkrGeekLife OS v20.0 (Odyssey Edition)...</p><p>Type 'help'.</p></div>
     <div class='input-line'><span class='prompt'>root@ukrgeek:~#</span><input type='text' id='cmd' autofocus autocomplete='off' spellcheck='false'></div>
 </div>
 </div></main>
+
 <footer>
     <div style="margin-bottom:10px;">[ SYSTEM RESOURCES: 4 CATS | 2 DOGS | 1 RAT | 1 TURTLE ]</div>
     <div class="footer-links">
