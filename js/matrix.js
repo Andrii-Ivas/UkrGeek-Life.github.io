@@ -4,7 +4,7 @@ const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
-const fontSize = 16;
+const fontSize = 14; 
 const columns = canvas.width/fontSize;
 const drops = [];
 for(let x=0; x<columns; x++) drops[x]=1;

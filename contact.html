@@ -5,7 +5,19 @@
     <a href="projects.html">[ ARSENAL ]</a>
     <a href="contact.html">[ TERMINAL ]</a>
 </nav>
-</header><main class="container"><div id="typewriter-content"><h1>Terminal Access</h1><div class='terminal-window'><div id='history'><p>UkrGeekLife OS v7.0...</p></div><div class='input-line'><span class='prompt'>guest@ukrgeek:~$</span><input type='text' id='cmd' autofocus></div></div></div></main>
+</header><main class="container"><div id="typewriter-content">
+        <h1>Terminal Access</h1>
+        <div class='terminal-window'>
+            <div id='history'>
+                <p>UkrGeekLife OS v8.1 (Mobile Ready)...</p>
+                <p>Type 'help' to verify privileges...</p>
+            </div>
+            <div class='input-line'>
+                <span class='prompt'>guest@ukrgeek:~$</span>
+                <input type='text' id='cmd' autofocus autocomplete="off" enterkeyhint="go">
+            </div>
+        </div>
+        </div></main>
 <footer>
     <div>System Online :: &copy; 2025 UkrGeekLife | Andrii Ivas</div>
     <div class="footer-links">
@@ -13,31 +25,67 @@
         <a href="about.html">/BIN/WHOAMI</a>
         <a href="contact.html">/DEV/STDIN</a>
     </div>
-    <div style="margin-top:5px; font-size:0.7rem; color:#444;">Zoo: 4 Cats, 2 Dogs, 1 Rat, 1 Turtle.</div>
+    <div class="zoo-counter">Running on: 4 Cats, 2 Dogs, 1 Turtle, 1 Rat & 100L Aquarium.</div>
+    <div class="irony">"I automated this footer because manual typing is a bug."</div>
     </footer>
 <script src="js/matrix.js"></script>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         const input = document.getElementById("cmd");
         const history = document.getElementById("history");
+        
+        // 1. Force Focus logic
         if(input) {
             input.focus();
-            document.addEventListener('click', () => input.focus());
+            // Refocus if user clicks anywhere on terminal
+            document.querySelector('.terminal-window').addEventListener('click', () => input.focus());
+            
             input.addEventListener("keydown", function(e) {
                 if (e.key === "Enter") {
-                    const cmd = input.value.trim().toLowerCase();
-                    history.innerHTML += `<div><span class="prompt">guest@ukrgeek:~$</span> ${input.value}</div>`;
+                    const rawCmd = input.value.trim();
+                    const cmd = rawCmd.toLowerCase();
+                    
+                    // Echo command
+                    history.innerHTML += `<div><span class="prompt">guest@ukrgeek:~$</span> ${rawCmd}</div>`;
+                    
                     let res = "";
                     switch(cmd) {
-                        case "help": res = "COMMANDS: [about] [slava] [clear]"; break;
-                        case "about": res = "See Identity page."; break;
-                        case "slava": res = "<span style='color:yellow'>GEROYAM SLAVA! 🇺🇦</span>"; break;
-                        case "clear": history.innerHTML = ""; break;
-                        default: res = "<span style='color:red'>Command not found.</span>";
+                        case "help": 
+                            res = "Available: [about] [projects] [email] [slava] [clear]"; 
+                            break;
+                        case "about": 
+                            res = "See Identity page (/BIN/WHOAMI)."; 
+                            break;
+                        case "projects": 
+                            res = "GitHub: ivas-andre. Automation. Security."; 
+                            break;
+                        case "email": 
+                            res = "contact@ukrgeek.life"; 
+                            break;
+                        case "slava": 
+                            res = "<span style='color:yellow; font-weight:bold;'>GEROYAM SLAVA! 🇺🇦</span>"; 
+                            break;
+                        case "russia": 
+                            res = "<span style='color:red; font-weight:bold;'>ERROR 403: TERRORIST STATE DETECTED. BLOCKING.</span>"; 
+                            break;
+                        case "clear": 
+                            history.innerHTML = ""; 
+                            break;
+                        case "":
+                            res = ""; 
+                            break;
+                        default: 
+                            res = `<span style='color:red'>Command '${rawCmd}' not found. Try 'help'.</span>`;
                     }
-                    if(cmd !== "clear") history.innerHTML += `<div style='color:#DDD'>${res}</div>`;
+                    
+                    if(cmd !== "clear" && res !== "") {
+                        history.innerHTML += `<div style='margin-bottom:10px; color:#DDD; line-height:1.4;'>${res}</div>`;
+                    }
+                    
                     input.value = "";
-                    document.querySelector('.terminal-window').scrollTop = document.querySelector('.terminal-window').scrollHeight;
+                    // Auto-scroll to bottom
+                    const win = document.querySelector('.terminal-window');
+                    win.scrollTop = win.scrollHeight;
                 }
             });
         }
